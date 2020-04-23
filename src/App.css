@@ -1,11 +1,55 @@
+*{
+  font-family: 'Century Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+
 .App {
   text-align: center;
+  margin:auto;
+  background-color: darkslategray;
+  width: 40%;
+  min-width: 400px;
+  height: 300px;
+  border-radius: 10px;
+  color:rgb(209, 209, 209);
 }
 
 .list-item{
   padding-bottom: 10px;
 }
 
+.header{
+  width: 100%;
+  background-color: darkgreen;
+  height: 50px;
+  box-shadow: 0px 0px 5px 0px rgb(153, 153, 153);
+
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.input{
+  display:block;
+  margin: auto;
+
+}
+
+.input-area{
+  margin-top:20px;
+}
+
 .button{
-  margin-left:20px;
+  margin-top:20px;
+  padding:5px 10px;
+  background-color: rgb(41, 27, 38);
+  border:none;
+  color: rgb(209, 209, 209);
+  cursor:pointer;
+
+  
+}
+
+button:hover {
+  background-color: rgb(17, 9, 15);
 }
