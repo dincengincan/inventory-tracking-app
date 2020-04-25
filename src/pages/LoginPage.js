@@ -4,8 +4,8 @@ import {useHistory} from 'react-router-dom';
 import '../App.css';
 
 const LoginPage = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("ecdinc");
+  const [password, setPassword] = useState("12345");
   const [dropdownValue, setDropdownValue] = useState("admin");
   const [loginData, setLoginData] = useState({})
   const [result, setResult] = useState("");
@@ -27,9 +27,10 @@ const LoginPage = () => {
   }
   useEffect(() => {
     const getData = async () => {
-      const response = await fetch("https://5e9c92600fd0b50016f7474e.mockapi.io/api/v1/users");
+      const response = await fetch("https://5e9b1cde10bf9c0016dd1b23.mockapi.io/musteri");
       const data = await response.json();
-      const users = data.username.map(user => user)
+      console.log(data)
+      const users = data.map(user => user)
       setLoginData({
         users : users,
       })
