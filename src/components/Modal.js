@@ -1,28 +1,29 @@
 import React,{useState} from 'react';
 import { createPortal } from 'react-dom';
+import styled from 'styled-components'
 
 const modalRoot = document.getElementById("modal-root")
 
 
-const modalStyle= {
-  position:  "fixed",
-  left: 0,
-  top: 0,
-  bottom: 0,
-  right: 0,
-  backgroundColor: "rgba(0,0,0,0.5)",
-  color: "#FFF",
-}
+const StyledModalContainer = styled.div`
+position: fixed;
+left: 0;
+top: 0;
+bottom: 0;
+right: 0;
+background-color: rgba(0,0,0,0.5);
+color: #FFF;
+`
 
-const divStyle= {
-  backgroundColor: "black",
-  height:"400px",
-  width:"400px",
-  margin: "auto",
-  textAlign: "center",
-  paddingTop: "50px",
-  marginTop: "50px"
-}
+const StyledFormContainer = styled.form`
+background-color: black; 
+height: 400px;
+width: 400px;
+margin: auto;
+text-align: center;
+padding-top: 50px;
+margin-top: 50px;
+`
 
 const Modal = ({closeModal, customerId, data, getData}) => {
   const selectedData = data.users.find(user => {
@@ -86,8 +87,8 @@ const Modal = ({closeModal, customerId, data, getData}) => {
   }
 
   return createPortal(
-        <div style={modalStyle}>
-          <form style={divStyle}>
+    <StyledModalContainer>
+      <StyledFormContainer>
         <div className="input-area">
           <label>
             User Name
@@ -115,13 +116,13 @@ const Modal = ({closeModal, customerId, data, getData}) => {
         <div className="input-area">
           <label>
             Email
-            <input required className="portal-form-input" value={newEmail} onChange={handleNewEmailChange} type="email"/>
+            <input className="portal-form-input" value={newEmail} onChange={handleNewEmailChange} type="email"/>
           </label>
         </div>
         <button className="button" onClick={() => updateUser(customerId)} >Kaydet</button>
         <button className="button list" onClick={closeModal}>Kapat</button>
-      </form>
-        </div>, modalRoot
+      </StyledFormContainer>
+    </StyledModalContainer>, modalRoot
     )
 }
     

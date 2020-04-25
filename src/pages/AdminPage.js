@@ -1,11 +1,28 @@
 import React, {useState, useEffect} from 'react';
+import styled from 'styled-components'
 
-import AddUser from "../components/AddUser"
+import AddUser from "../components/AddContent"
 import UsersList from "../components/UsersList"
 import Modal from "../components/Modal"
 
 
+const StyledContentButton = styled.button`
+  margin-top:20px;
+  padding:5px 10px;
+  background-color: ${({selectedContent}) => selectedContent ? "rgb(155, 83, 101)" : "rgb(105, 83, 101)"} ;
+  border:none;
+  color: rgb(209, 209, 209);
+  cursor:pointer;
+  outline: none;
+  padding: 10px 20px;
+
+  :hover{
+    background-color: rgb(17, 9, 15);
+  }
+`
+
 const AdminPage = () => {
+    const [showContent, setShowContent] = useState("")
     const [newUsername, setNewUsername] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [newName, setNewName] = useState("");
@@ -24,7 +41,7 @@ const AdminPage = () => {
 
     const closeModal = () => {
       console.log("close modal")
-        setShowPortal(false);
+      setShowPortal(false);
     }
     
     
@@ -35,21 +52,24 @@ const AdminPage = () => {
     const handleNewSurnameChange = (e) => {
       setNewSurname(e.target.value);
     }
-
+    
     const handleNewEmailChange = (e) => {
       setNewEmail(e.target.value);
     }
 
     const handleNewUsernameChange = (e) => {
-        setNewUsername(e.target.value);
+      setNewUsername(e.target.value);
       }
-    
-      const handleNewPasswordChange = (e) => {
+      
+    const handleNewPasswordChange = (e) => {
         setNewPassword(e.target.value);
       }
 
-      const addNewUser = async () => {
-        const settings = {
+    const handleUserContent = () => setShowContent("user")
+    const handleProductContent = () => setShowContent("product")
+
+    const addNewUser = async () => {
+      const settings = {
           method: "POST",
           body: JSON.stringify({
             name: newName,
@@ -62,7 +82,7 @@ const AdminPage = () => {
             "Content-type": "application/json; charset=UTF-8"
           }
         }
-        try {
+      try {
           const fetchResponse = await fetch("https://5e9b1cde10bf9c0016dd1b23.mockapi.io/musteri", settings);
           const data = await fetchResponse.json();
           if(data){
@@ -70,10 +90,10 @@ const AdminPage = () => {
             setNewUserResult("success")
           }
         }
-        catch(e) {
+      catch(e) {
           console.log(e);
         }
-      }
+    }
     
 
       const getData = async () => {
@@ -112,10 +132,10 @@ const AdminPage = () => {
           console.log(e);
         }
       }
+
     
-    return(
-        <div>
-          <h1>Admin Page</h1>
+      const userContent = () => (
+            <>
             <AddUser 
             newUsername={newUsername}
             newPassword={newPassword}
@@ -133,12 +153,32 @@ const AdminPage = () => {
             
             />
             <UsersList handleClickDelete={deleteUser} loginData = {loginData} handleClickModal={handleClickModal} />
+            </>
+      )
+
+    const productContent = () => (
+        <div>
+        Product Content
+        </div>
+    )
+
+    console.log(showContent === "user" ? true : false)
+    return(
+        <div>
+          <h1>Admin Page</h1>
+          <StyledContentButton selectedContent={showContent === "user"} onClick={handleUserContent} >User Panel</StyledContentButton>
+          <StyledContentButton selectedContent={showContent === "product"} onClick={handleProductContent}>Product Panel</StyledContentButton>
+            {
+              showContent === "user" && userContent()
+            }
+            {
+              showContent === "product" && productContent()
+            }
             {
             showPortal && <Modal data={loginData} customerId= {selectedCustomerId} closeModal={closeModal} getData={getData} />
-        }
+            }
         </div>
     )
 }
-
 
 export default AdminPage;
