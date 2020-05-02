@@ -2,13 +2,13 @@ import React from 'react';
 
 import User from "./User"
 
-const UsersList = ({loginData, handleClickDelete, handleClickModal}) => {
+const UsersList = ({loginUserData, handleClickDelete, handleClickModal}) => {
     return(
         <div>
-            <h2>Mevcut Kullanıcılar (Toplam {loginData.users && loginData.users.length} adet)</h2>
+            <h2>Mevcut Kullanıcılar (Toplam {loginUserData.users && loginUserData.users.length} adet)</h2>
             <ul>
                 {  
-                    loginData.users && ( loginData.users.map(item =><User key={item.customerId} item={item} handleClickDelete={handleClickDelete} handleClickModal={handleClickModal} />) )
+                    loginUserData.users && ( loginUserData.users.map(item =><User key={item.customerId} item={item} handleClickDelete={handleClickDelete} handleClickModal={handleClickModal} />) )
                 }
             </ul>
         </div>

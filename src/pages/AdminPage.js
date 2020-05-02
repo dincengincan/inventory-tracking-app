@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components'
 
-import AddUser from "../components/AddContent"
+import AddUser from "../components/AddUser"
 import UsersList from "../components/UsersList"
 import Modal from "../components/Modal"
+import AddProduct from "../components/AddProduct"
+import ProductsList from "../components/ProductsList"
 
 
 const StyledContentButton = styled.button`
@@ -23,16 +25,13 @@ const StyledContentButton = styled.button`
 
 const AdminPage = () => {
     const [showContent, setShowContent] = useState("")
-    const [newUsername, setNewUsername] = useState("");
-    const [newPassword, setNewPassword] = useState("");
-    const [newName, setNewName] = useState("");
-    const [newSurname, setNewSurname] = useState("");
-    const [newEmail, setNewEmail] = useState("");
     const [newUserResult, setNewUserResult] = useState("");
-    const [loginData, setLoginData] = useState({});
+    const [newProductResult, setNewProductResult] = useState("");
+    const [loginUserData, setUserLoginData] = useState({});
+    const [productsData, setProductsData] = useState({});
     const [showPortal, setShowPortal] = useState(false);
     const [selectedCustomerId, setSelectedCustomerId] = useState("");
-
+    
 
     const handleClickModal = (customerId) => {
       setSelectedCustomerId(customerId)  
@@ -40,43 +39,22 @@ const AdminPage = () => {
     }
 
     const closeModal = () => {
-      console.log("close modal")
       setShowPortal(false);
     }
-    
-    
-    const handleNewNameChange = (e) => {
-      setNewName(e.target.value);
-    }
-
-    const handleNewSurnameChange = (e) => {
-      setNewSurname(e.target.value);
-    }
-    
-    const handleNewEmailChange = (e) => {
-      setNewEmail(e.target.value);
-    }
-
-    const handleNewUsernameChange = (e) => {
-      setNewUsername(e.target.value);
-      }
-      
-    const handleNewPasswordChange = (e) => {
-        setNewPassword(e.target.value);
-      }
 
     const handleUserContent = () => setShowContent("user")
     const handleProductContent = () => setShowContent("product")
 
-    const addNewUser = async () => {
+    const addNewUser = async (comboboxValue, usernameInputValue, passwordInputValue, nameInputValue, surnameInputValue, emailInputValue) => {
       const settings = {
           method: "POST",
           body: JSON.stringify({
-            name: newName,
-            surname: newSurname,
-            username: newUsername,
-            password: newPassword,
-            email: newEmail,
+            name: nameInputValue,
+            surname: surnameInputValue,
+            username: usernameInputValue,
+            password: passwordInputValue,
+            userType: comboboxValue,
+            email: emailInputValue,
           }),
           headers: {
             "Content-type": "application/json; charset=UTF-8"
@@ -86,8 +64,33 @@ const AdminPage = () => {
           const fetchResponse = await fetch("https://5e9b1cde10bf9c0016dd1b23.mockapi.io/musteri", settings);
           const data = await fetchResponse.json();
           if(data){
-            getData();
-            setNewUserResult("success")
+            getUserData();
+            setNewUserResult("success");
+          }
+        }
+      catch(e) {
+          console.log(e);
+        }
+    }
+
+    const addNewProduct = async (comboboxValue, productName, inventoryNumber) => {
+      const settings = {
+          method: "POST",
+          body: JSON.stringify({
+            productName: productName,
+            categoryName: comboboxValue,
+            inventoryNumber: inventoryNumber,
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8"
+          }
+        }
+      try {
+          const fetchResponse = await fetch("https://5e9b1cde10bf9c0016dd1b23.mockapi.io/inventory", settings);
+          const data = await fetchResponse.json();
+          if(data){
+            getProductsData();
+            setNewProductResult("success");
           }
         }
       catch(e) {
@@ -96,25 +99,46 @@ const AdminPage = () => {
     }
     
 
-      const getData = async () => {
+      const getUserData = async () => {
         const response = await fetch("https://5e9b1cde10bf9c0016dd1b23.mockapi.io/musteri");
         const data = await response.json();
         const users = data.map(user => user)
-        setLoginData({
+        setUserLoginData({
           users : users,
         })
       }
 
+      const getProductsData = async () => {
+        const response = await fetch("https://5e9b1cde10bf9c0016dd1b23.mockapi.io/inventory");
+        const data = await response.json();
+        const products = data.map(product => product)
+        setProductsData({
+          products : products,
+        })
+      }
+
       useEffect(() => {
-        const getData = async () => {
+        const getUserData = async () => {
           const response = await fetch("https://5e9b1cde10bf9c0016dd1b23.mockapi.io/musteri");
           const data = await response.json();
           const users = data.map(user => user)
-          setLoginData({
+          setUserLoginData({
             users : users,
           })
         }
-        getData();
+        getUserData();
+      },[])
+
+      useEffect(() => {
+        const getProductsData = async () => {
+          const response = await fetch("https://5e9b1cde10bf9c0016dd1b23.mockapi.io/inventory");
+          const data = await response.json();
+          const products = data.map(product => product)
+          setProductsData({
+            products : products,
+          })
+        }
+        getProductsData();
       },[])
     
       const deleteUser = async (customerId) => {
@@ -125,7 +149,7 @@ const AdminPage = () => {
           const fetchResponse = await fetch(`https://5e9b1cde10bf9c0016dd1b23.mockapi.io/musteri/${customerId}`, settings);
           const data = await fetchResponse.json();
           if(data){
-            getData();
+            getUserData();
           }
         }
         catch(e) {
@@ -136,30 +160,16 @@ const AdminPage = () => {
     
       const userContent = () => (
             <>
-            <AddUser 
-            newUsername={newUsername}
-            newPassword={newPassword}
-            newName={newName}
-            newSurname={newSurname}
-            newEmail={newEmail}
-            handleNewUsernameChange = {handleNewUsernameChange}
-            handleNewPasswordChange = {handleNewPasswordChange}
-            handleNewNameChange = {handleNewNameChange}
-            handleNewSurnameChange= {handleNewSurnameChange}
-            handleNewEmailChange= {handleNewEmailChange}
-            newUserResult = {newUserResult}
-            addNewUser = {addNewUser}
-            loginData = {loginData}
-            
-            />
-            <UsersList handleClickDelete={deleteUser} loginData = {loginData} handleClickModal={handleClickModal} />
+            <AddUser addNewUser = {addNewUser} newUserResult = {newUserResult} />
+            <UsersList handleClickDelete={deleteUser} loginUserData = {loginUserData} handleClickModal={handleClickModal} />
             </>
       )
 
     const productContent = () => (
-        <div>
-        Product Content
-        </div>
+      <>
+      <AddProduct addNewProduct= {addNewProduct} newProductResult = {newProductResult} />
+      <ProductsList handleClickDelete={deleteUser} productsData = {productsData} handleClickModal={handleClickModal} />
+      </>
     )
 
     console.log(showContent === "user" ? true : false)
@@ -175,7 +185,7 @@ const AdminPage = () => {
               showContent === "product" && productContent()
             }
             {
-            showPortal && <Modal data={loginData} customerId= {selectedCustomerId} closeModal={closeModal} getData={getData} />
+            showPortal && <Modal data={loginUserData} customerId= {selectedCustomerId} closeModal={closeModal} getUserData={getUserData} />
             }
         </div>
     )

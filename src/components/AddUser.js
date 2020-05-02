@@ -1,7 +1,7 @@
-import React from "react";
+import React , {useState} from "react";
 
 
-const AddUser = ({
+/*const AddUser = ({
     handleNewUsernameChange, 
     handleNewPasswordChange, 
     handleNewNameChange,
@@ -14,7 +14,6 @@ const AddUser = ({
     newName,
     newSurname,
     newEmail,
-    loginData
  }) => (
     <div>
     <h2>Add New User</h2>
@@ -49,8 +48,8 @@ const AddUser = ({
             <input className="new-user-form-input" onChange={handleNewEmailChange} value={newEmail}  type="email"/>
           </label>
         </div>
-      </form>
         <button className="button" onClick={addNewUser}>Add</button>
+      </form>
         {
           newUserResult === "success" && (
           <div>
@@ -68,5 +67,32 @@ const AddUser = ({
         
         </div>
 )
+
+export default AddUser;*/
+
+import useNewItem from "../common/hooks"
+
+const AddUser = ({addNewUser, newUserResult}) => {
+  const [element, comboboxValue, usernameInputValue, passwordInputValue, nameInputValue, surnameInputValue, emailInputValue] = useNewItem({title: "Kullanıcı Tipi", options: ["admin", "user"]}, "Username", "Password", "Name", "Surname", "Email")
+    console.log(comboboxValue)
+  const handleClick = () => {
+    addNewUser(comboboxValue, usernameInputValue, passwordInputValue, nameInputValue, surnameInputValue, emailInputValue)
+  }
+
+  return(
+    <> 
+        {
+            element()
+        }   
+        <button className="button" onClick={handleClick}>Add</button>
+        {
+            newUserResult === "success" && <h2>Yeni kullanıcı başarıyla eklendi!</h2>
+        }
+        {
+            newUserResult === "failure" && <h2>Kullanıcı eklenemedi!</h2>
+        }
+    </>
+)
+}
 
 export default AddUser;
