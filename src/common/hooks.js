@@ -26,9 +26,9 @@ const useNewItem = (comboboxObject, firstInput, secondInput, thirdInput, fourthI
                 comboboxObject && (
                     <div className="input-area">
                         {comboboxObject.title}
-                        <select className="new-user-form-input">
+                        <select className="new-user-form-input" value={comboboxSelectedValue} onChange={handleComboboxChange}>
                             {comboboxObject.options.map(option => {
-                                return <option  key={option} value={comboboxSelectedValue} onChange={handleComboboxChange}>{option}</option>
+                                return <option  key={option} value={option} >{option}</option>
                             })}
                         </select>
                     </div>
