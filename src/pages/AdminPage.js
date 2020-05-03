@@ -157,32 +157,47 @@ const AdminPage = () => {
         }
       }
 
+      const deleteProduct = async (productId) => {
+        const settings = {
+          method: "DELETE"
+        }
+        try {
+          const fetchResponse = await fetch(`https://5e9b1cde10bf9c0016dd1b23.mockapi.io/inventory/${productId}`, settings);
+          const data = await fetchResponse.json();
+          if(data){
+            getProductsData();
+          }
+        }
+        catch(e) {
+          console.log(e);
+        }
+      }
+
     
-      const userContent = () => (
+      const UserContent = () => (
             <>
             <AddUser addNewUser = {addNewUser} newUserResult = {newUserResult} />
-            <UsersList handleClickDelete={deleteUser} loginUserData = {loginUserData} handleClickModal={handleClickModal} />
+            <UsersList deleteUser={deleteUser} loginUserData = {loginUserData} handleClickModal={handleClickModal} />
             </>
       )
 
-    const productContent = () => (
+    const ProductContent = () => (
       <>
       <AddProduct addNewProduct= {addNewProduct} newProductResult = {newProductResult} />
-      <ProductsList handleClickDelete={deleteUser} productsData = {productsData} handleClickModal={handleClickModal} />
+      <ProductsList deleteProduct={deleteProduct} productsData = {productsData} handleClickModal={handleClickModal} />
       </>
     )
 
-    console.log(showContent === "user" ? true : false)
     return(
         <div>
           <h1>Admin Page</h1>
           <StyledContentButton selectedContent={showContent === "user"} onClick={handleUserContent} >User Panel</StyledContentButton>
           <StyledContentButton selectedContent={showContent === "product"} onClick={handleProductContent}>Product Panel</StyledContentButton>
             {
-              showContent === "user" && userContent()
+              showContent === "user" && <UserContent />
             }
             {
-              showContent === "product" && productContent()
+              showContent === "product" &&  <ProductContent />
             }
             {
             showPortal && <Modal data={loginUserData} customerId= {selectedCustomerId} closeModal={closeModal} getUserData={getUserData} />

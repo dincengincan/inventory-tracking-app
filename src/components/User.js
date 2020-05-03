@@ -3,7 +3,6 @@ import React from 'react';
 
 const User = ({item, handleClickDelete, handleClickModal}) => {
     
-    console.log(item)
     return ( 
         <div>
             <li className="list-item">{`${item.name} ----------> ${item.surname} ----------> ${item.userType} ----------> ${item.username} ----------> ${item.password} ----------> ${item.email}`}

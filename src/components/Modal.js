@@ -2,6 +2,8 @@ import React,{useState} from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components'
 
+import useForm from "../common/hooks"
+
 const modalRoot = document.getElementById("modal-root")
 
 
@@ -29,6 +31,8 @@ const Modal = ({closeModal, customerId, data, getData}) => {
   const selectedData = data.users.find(user => {
     return user.customerId === customerId;
   })
+
+  
     
   const [newUsername, setNewUsername] = useState(selectedData.username);
   const [newPassword, setNewPassword] = useState(selectedData.password);

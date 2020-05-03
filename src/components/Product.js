@@ -1,13 +1,12 @@
 import React from 'react';
 
 
-const Product = ({item}) => {
-    console.log(item)
+const Product = ({item, deleteProduct, handleClickModal}) => {
     return ( 
         <div>
             <li className="list-item">{`${item.productName} ----------> ${item.categoryName} ----------> ${item.inventoryNumber}`}
-                <button  className="button list">Düzenle</button>
-                <button  className="button list">Sil</button>
+                <button onClick = {() => handleClickModal(item.productId)} className="button list">Düzenle</button>
+                <button  onClick = {() => deleteProduct(item.productId)} className="button list">Sil</button>
             </li>
         </div>
     )

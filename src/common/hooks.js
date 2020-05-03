@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import '../App.css'
 
-const useNewItem = (comboboxObject, firstInput, secondInput, thirdInput, fourthInput, fifthInput, sixthInput) => {
-    const [comboboxSelectedValue, setComboboxSelectedValue] = useState(comboboxObject.options[0])
-    const [firstInputValue, setFirstInputValue] = useState("")
-    const [secondInputValue, setSecondInputValue] = useState("")
-    const [thirdInputValue, setThirdInputValue] = useState("")
-    const [fourthInputValue, setFourthInputValue] = useState("")
-    const [fifthInputValue, setFifthInputValue] = useState("")
-    const [sixthInputValue, setSixthInputValue] = useState("")
+const useForm = (labels, options, defaultStates ) => {
+    const [comboboxSelectedValue, setComboboxSelectedValue] = useState(defaultStates ? defaultStates.dropdown : options[0])
+    const [firstInputValue, setFirstInputValue] = useState( defaultStates ? defaultStates.firstInput : "")
+    const [secondInputValue, setSecondInputValue] = useState(defaultStates ? defaultStates.secondInput : "")
+    const [thirdInputValue, setThirdInputValue] = useState(defaultStates ? defaultStates.thirdInput : "")
+    const [fourthInputValue, setFourthInputValue] = useState(defaultStates ? defaultStates.fourthInput : "")
+    const [fifthInputValue, setFifthInputValue] = useState(defaultStates ? defaultStates.fifthInput : "")
+    const [sixthInputValue, setSixthInputValue] = useState(defaultStates ? defaultStates.sixthInput : "")
 
     const handleComboboxChange = (e) => setComboboxSelectedValue(e.target.value)
     const handleFirstInputChange = (e) => setFirstInputValue(e.target.value)
@@ -20,14 +20,14 @@ const useNewItem = (comboboxObject, firstInput, secondInput, thirdInput, fourthI
 
     
 
-    const element = () => (
+    const Form = () => (
         <form>
             {
-                comboboxObject && (
+                labels.dropdown && (
                     <div className="input-area">
-                        {comboboxObject.title}
+                        {labels.dropdown}
                         <select className="new-user-form-input" value={comboboxSelectedValue} onChange={handleComboboxChange}>
-                            {comboboxObject.options.map(option => {
+                            {options.map(option => {
                                 return <option  key={option} value={option} >{option}</option>
                             })}
                         </select>
@@ -35,60 +35,60 @@ const useNewItem = (comboboxObject, firstInput, secondInput, thirdInput, fourthI
                 )
             }
             {
-                firstInput && (
+                labels.firstInput && (
                     <div className="input-area">
                         <label>
-                            {firstInput}
+                            {labels.firstInput}
                             <input className="new-user-form-input" type="text" value={firstInputValue} onChange={handleFirstInputChange}/>
                         </label>
                     </div>
                 )
             }
             {
-                secondInput && ( 
+                labels.secondInput && ( 
                     <div className="input-area">
                         <label>
-                            {secondInput}
+                            {labels.secondInput}
                             <input className="new-user-form-input" type="text" value={secondInputValue} onChange={handleSecondInputChange}/>
                         </label>
                     </div>
                 )
             }
             {
-                thirdInput && ( 
+                labels.thirdInput && ( 
                     <div className="input-area">
                         <label>
-                            {thirdInput}
+                            {labels.thirdInput}
                             <input className="new-user-form-input" type="text" value={thirdInputValue} onChange={handleThirdInputChange}/>
                         </label>
                     </div>
                 )
             }
             {
-                fourthInput && ( 
+                labels.fourthInput && ( 
                     <div className="input-area">
                         <label>
-                            {fourthInput}
+                            {labels.fourthInput}
                             <input className="new-user-form-input" type="text" value={fourthInputValue} onChange={handleFourthInputChange}/>
                         </label>
                     </div>
                 )
             }
             {
-                fifthInput && ( 
+                labels.fifthInput && ( 
                     <div className="input-area">
                         <label>
-                            {fifthInput}
+                            {labels.fifthInput}
                             <input className="new-user-form-input" type="text" value={fifthInputValue} onChange={handleFifthInputChange}/>
                         </label>
                     </div>
                 )
             }
             {
-                sixthInput && ( 
+                labels.sixthInput && ( 
                     <div className="input-area">
                         <label>
-                            {sixthInput}
+                            {labels.sixthInput}
                             <input className="new-user-form-input" type="text" value={sixthInputValue} onChange={handleSixthInputChange}/>
                         </label>
                     </div>
@@ -97,8 +97,8 @@ const useNewItem = (comboboxObject, firstInput, secondInput, thirdInput, fourthI
         </form>
     )
 
-    return [ element, comboboxSelectedValue, firstInputValue, secondInputValue, thirdInputValue, fourthInputValue, fifthInputValue, sixthInputValue]
+    return [ Form, [comboboxSelectedValue, firstInputValue, secondInputValue, thirdInputValue, fourthInputValue, fifthInputValue, sixthInputValue]]
 }
 
 
-export default useNewItem;
+export default useForm;
