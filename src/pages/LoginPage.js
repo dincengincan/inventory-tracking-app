@@ -29,7 +29,6 @@ const LoginPage = () => {
     const getData = async () => {
       const response = await fetch("https://5e9b1cde10bf9c0016dd1b23.mockapi.io/musteri");
       const data = await response.json();
-      console.log(data)
       const users = data.map(user => user)
       setLoginData({
         users : users,
@@ -43,15 +42,17 @@ const LoginPage = () => {
     e.preventDefault();
     
     const selectedUserObject =  loginData.users.find(item => {
+      console.log(loginData)
       return item.username === username 
     })
     const isUserCorrect = selectedUserObject.password === password && selectedUserObject.userType === dropdownValue    
 
+    console.log(isUserCorrect)
     if( dropdownValue === "admin" && isUserCorrect) {
       setResult("success");
       history.push("/admin")
     }
-    if(dropdownValue === "customer" && isUserCorrect){ 
+    if(dropdownValue === "user" && isUserCorrect){ 
       setResult("success");
       history.push("/customer")
     }

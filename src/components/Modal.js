@@ -6,7 +6,6 @@ import useForm from "../common/hooks"
 
 const modalRoot = document.getElementById("modal-root")
 
-
 const StyledModalContainer = styled.div`
 position: fixed;
 left: 0;
@@ -32,46 +31,41 @@ const Modal = ({closeModal, customerId, data, getData}) => {
     return user.customerId === customerId;
   })
 
-  
-    
-  const [newUsername, setNewUsername] = useState(selectedData.username);
-  const [newPassword, setNewPassword] = useState(selectedData.password);
-  const [newName, setNewName] = useState(selectedData.name);
-  const [newSurname, setNewSurname] = useState(selectedData.surname);
-  const [newEmail, setNewEmail] = useState(selectedData.email);
-  
-  
 
-  const handleNewNameChange = (e) => {
-    setNewName(e.target.value);
+  const labels = {
+    dropdown: "Kullanıcı Tipi",
+    firstInput: "Kullanıcı Adı",
+    secondInput: "Şifre",
+    thirdInput: "Ad",
+    fourthInput: "Soyad",
+    fifthInput: "Email"
   }
 
-  const handleNewSurnameChange = (e) => {
-    setNewSurname(e.target.value);
+  const defaultStates = {
+    dropdown: selectedData.userType,
+    firstInput: selectedData.username,
+    secondInput: selectedData.password,
+    thirdInput: selectedData.name,
+    fourthInput: selectedData.surname,
+    fifthInput: selectedData.email
   }
 
-  const handleNewEmailChange = (e) => {
-    setNewEmail(e.target.value);
-  }
-
-  const handleNewUsernameChange = (e) => {
-      setNewUsername(e.target.value);
-    }
+  const options = ["admin", "user"]
   
-  const handleNewPasswordChange = (e) => {
-      setNewPassword(e.target.value);
-  }
+  const [UserForm, inputStates] = useForm( labels, options, defaultStates)
+  const [comboboxValue, usernameInputValue, passwordInputValue, nameInputValue, surnameInputValue, emailInputValue] = inputStates;
   
   const updateUser = async (customerId) => {
       console.log(customerId)
       const settings = {
         method: "PUT",
         body: JSON.stringify({
-          name: newName,
-          surname: newSurname,
-          username: newUsername,
-          password: newPassword,
-          email: newEmail,
+          userType: comboboxValue,
+          name: nameInputValue,
+          surname: surnameInputValue,
+          username: usernameInputValue,
+          password: passwordInputValue,
+          email: emailInputValue,
         }),
         headers: {
           "Content-type": "application/json; charset=UTF-8"
@@ -93,36 +87,7 @@ const Modal = ({closeModal, customerId, data, getData}) => {
   return createPortal(
     <StyledModalContainer>
       <StyledFormContainer>
-        <div className="input-area">
-          <label>
-            User Name
-            <input className="portal-form-input" value={newUsername} onChange={handleNewUsernameChange}   type="text"/>
-          </label>
-        </div>
-        <div className="input-area">
-          <label>
-            Password
-            <input  className="portal-form-input" value={newPassword} onChange={handleNewPasswordChange}  type="text"/>
-          </label>
-        </div>
-        <div className="input-area">
-          <label>
-            Name 
-            <input  className="portal-form-input" value={newName} onChange={handleNewNameChange}    type="text"/>
-          </label>
-        </div>
-        <div className="input-area">
-          <label>
-            Surname
-            <input  className="portal-form-input"  value={newSurname} onChange={handleNewSurnameChange} type="text"/>
-          </label>
-        </div>
-        <div className="input-area">
-          <label>
-            Email
-            <input className="portal-form-input" value={newEmail} onChange={handleNewEmailChange} type="email"/>
-          </label>
-        </div>
+        <UserForm />
         <button className="button" onClick={() => updateUser(customerId)} >Kaydet</button>
         <button className="button list" onClick={closeModal}>Kapat</button>
       </StyledFormContainer>

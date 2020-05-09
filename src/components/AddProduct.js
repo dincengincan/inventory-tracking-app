@@ -16,7 +16,7 @@ const AddProduct = ({newProductResult, addNewProduct}) => {
       const options = ["Kırtasiye", "Teknik", "Diğer"]
 
 
-      const [ProductForm, inputStates] = useForm( labels, options, defaultStates)
+      const [productForm, inputStates] = useForm(labels, options, defaultStates)
       const [comboboxValue, productName, inventoryNumber] = inputStates;
 
     const handleClick = () => {
@@ -25,7 +25,8 @@ const AddProduct = ({newProductResult, addNewProduct}) => {
 
     return(
         <> 
-            <ProductForm />   
+            {productForm()}  
+            {/*can not use as < ProductFrom /> due to problem of re-rendering */}
             <button className="button" onClick={handleClick}>Add</button>
             {
                 newProductResult === "success" && <h2>Yeni Ürün Başarıyla Eklendi!</h2>

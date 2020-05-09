@@ -2,31 +2,28 @@ import React, {useState} from 'react';
 import '../App.css'
 
 const useForm = (labels, options, defaultStates ) => {
-    const [comboboxSelectedValue, setComboboxSelectedValue] = useState(defaultStates ? defaultStates.dropdown : options[0])
-    const [firstInputValue, setFirstInputValue] = useState( defaultStates ? defaultStates.firstInput : "")
-    const [secondInputValue, setSecondInputValue] = useState(defaultStates ? defaultStates.secondInput : "")
-    const [thirdInputValue, setThirdInputValue] = useState(defaultStates ? defaultStates.thirdInput : "")
-    const [fourthInputValue, setFourthInputValue] = useState(defaultStates ? defaultStates.fourthInput : "")
-    const [fifthInputValue, setFifthInputValue] = useState(defaultStates ? defaultStates.fifthInput : "")
-    const [sixthInputValue, setSixthInputValue] = useState(defaultStates ? defaultStates.sixthInput : "")
+    const [inputValues, setInputValues] = useState({
+        dropdownInputValue: options[1],
+        firstInputValue: defaultStates.firstInput || "",
+        secondInputValue: defaultStates.secondInput || "",
+        thirdInputValue: defaultStates.thirdInput || "",
+        fourthInputValue: defaultStates.fourthInput || "",
+        fifthInputValue: defaultStates.fifthInput || "",
+        sixthInputValue: defaultStates.sixthInput || "",
+    })
 
-    const handleComboboxChange = (e) => setComboboxSelectedValue(e.target.value)
-    const handleFirstInputChange = (e) => setFirstInputValue(e.target.value)
-    const handleSecondInputChange = (e) => setSecondInputValue(e.target.value)
-    const handleThirdInputChange = (e) => setThirdInputValue(e.target.value)
-    const handleFourthInputChange = (e) => setFourthInputValue(e.target.value)
-    const handleFifthInputChange = (e) => setFifthInputValue(e.target.value)
-    const handleSixthInputChange = (e) => setSixthInputValue(e.target.value)
+    const genericHandleChange = (type, event) => {
+        setInputValues({...inputValues, [type]: event.target.value})
+    }
 
-    
 
-    const Form = () => (
+    const form = () => (
         <form>
             {
                 labels.dropdown && (
                     <div className="input-area">
                         {labels.dropdown}
-                        <select className="new-user-form-input" value={comboboxSelectedValue} onChange={handleComboboxChange}>
+                        <select className="new-user-form-input" value={inputValues.dropdownInputValue} onChange={(e) => genericHandleChange("dropdownInputValue", e)}>
                             {options.map(option => {
                                 return <option  key={option} value={option} >{option}</option>
                             })}
@@ -39,7 +36,7 @@ const useForm = (labels, options, defaultStates ) => {
                     <div className="input-area">
                         <label>
                             {labels.firstInput}
-                            <input className="new-user-form-input" type="text" value={firstInputValue} onChange={handleFirstInputChange}/>
+                            <input key={labels.firstInput} className="new-user-form-input" type="text" value={inputValues.firstInputValue} onChange={(e) => genericHandleChange("firstInputValue", e)}/>
                         </label>
                     </div>
                 )
@@ -49,7 +46,7 @@ const useForm = (labels, options, defaultStates ) => {
                     <div className="input-area">
                         <label>
                             {labels.secondInput}
-                            <input className="new-user-form-input" type="text" value={secondInputValue} onChange={handleSecondInputChange}/>
+                            <input key={labels.secondInput} className="new-user-form-input" type="text" value={inputValues.secondInputValue} onChange={(e) => genericHandleChange("secondInputValue", e)}/>
                         </label>
                     </div>
                 )
@@ -59,7 +56,7 @@ const useForm = (labels, options, defaultStates ) => {
                     <div className="input-area">
                         <label>
                             {labels.thirdInput}
-                            <input className="new-user-form-input" type="text" value={thirdInputValue} onChange={handleThirdInputChange}/>
+                            <input key={labels.thirdInput}  className="new-user-form-input" type="text" value={inputValues.thirdInputValue} onChange={(e) => genericHandleChange("thirdInputValue", e)}/>
                         </label>
                     </div>
                 )
@@ -69,7 +66,7 @@ const useForm = (labels, options, defaultStates ) => {
                     <div className="input-area">
                         <label>
                             {labels.fourthInput}
-                            <input className="new-user-form-input" type="text" value={fourthInputValue} onChange={handleFourthInputChange}/>
+                            <input key={labels.fourthInput} className="new-user-form-input" type="text" value={inputValues.fourthInputValue} onChange={(e) => genericHandleChange("fourthInputValue", e)}/>
                         </label>
                     </div>
                 )
@@ -79,7 +76,7 @@ const useForm = (labels, options, defaultStates ) => {
                     <div className="input-area">
                         <label>
                             {labels.fifthInput}
-                            <input className="new-user-form-input" type="text" value={fifthInputValue} onChange={handleFifthInputChange}/>
+                            <input key={labels.fifthInput} className="new-user-form-input" type="text" value={inputValues.fifthInputValue} onChange={(e) => genericHandleChange("fifthInputValue", e)}/>
                         </label>
                     </div>
                 )
@@ -89,7 +86,7 @@ const useForm = (labels, options, defaultStates ) => {
                     <div className="input-area">
                         <label>
                             {labels.sixthInput}
-                            <input className="new-user-form-input" type="text" value={sixthInputValue} onChange={handleSixthInputChange}/>
+                            <input key={labels.sixthInput} className="new-user-form-input" type="text" value={inputValues.sixthInputValue} onChange={(e) => genericHandleChange("sixthInputValue", e)}/>
                         </label>
                     </div>
                 )
@@ -97,7 +94,7 @@ const useForm = (labels, options, defaultStates ) => {
         </form>
     )
 
-    return [ Form, [comboboxSelectedValue, firstInputValue, secondInputValue, thirdInputValue, fourthInputValue, fifthInputValue, sixthInputValue]]
+    return [ form, [inputValues.dropdownInputValue, inputValues.firstInputValue, inputValues.secondInputValue, inputValues.thirdInputValue, inputValues.fourthInputValue, inputValues.fifthInputValue, inputValues.sixthInputValue]]
 }
 
 

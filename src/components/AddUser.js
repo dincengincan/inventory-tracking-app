@@ -20,18 +20,20 @@ const AddUser = ({addNewUser, newUserResult}) => {
 
   
   
-  const [UserForm, inputStates] = useForm( labels, options, defaultStates)
+  const [userForm, inputStates] = useForm( labels, options, defaultStates)
 
   const [comboboxValue, usernameInputValue, passwordInputValue, nameInputValue, surnameInputValue, emailInputValue] = inputStates;
-  
+  console.log(comboboxValue)
 
+  
   const handleClick = () => {
     addNewUser(comboboxValue, usernameInputValue, passwordInputValue, nameInputValue, surnameInputValue, emailInputValue)
   }
 
   return(
     <> 
-        <UserForm />
+        {userForm()}
+        {/*can not use as < UserForm /> due to problem of re-rendering */}
         <button className="button" onClick={handleClick}>Add</button>
         {
             newUserResult === "success" && <h2>Yeni kullanıcı başarıyla eklendi!</h2>

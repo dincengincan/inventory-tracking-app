@@ -174,14 +174,14 @@ const AdminPage = () => {
       }
 
     
-      const UserContent = () => (
+      const UserPanel = () => (
             <>
             <AddUser addNewUser = {addNewUser} newUserResult = {newUserResult} />
             <UsersList deleteUser={deleteUser} loginUserData = {loginUserData} handleClickModal={handleClickModal} />
             </>
       )
 
-    const ProductContent = () => (
+    const ProductPanel = () => (
       <>
       <AddProduct addNewProduct= {addNewProduct} newProductResult = {newProductResult} />
       <ProductsList deleteProduct={deleteProduct} productsData = {productsData} handleClickModal={handleClickModal} />
@@ -194,10 +194,11 @@ const AdminPage = () => {
           <StyledContentButton selectedContent={showContent === "user"} onClick={handleUserContent} >User Panel</StyledContentButton>
           <StyledContentButton selectedContent={showContent === "product"} onClick={handleProductContent}>Product Panel</StyledContentButton>
             {
-              showContent === "user" && <UserContent />
+              showContent === "user" && <UserPanel />
             }
+            
             {
-              showContent === "product" &&  <ProductContent />
+              showContent === "product" &&  <ProductPanel />
             }
             {
             showPortal && <Modal data={loginUserData} customerId= {selectedCustomerId} closeModal={closeModal} getUserData={getUserData} />
