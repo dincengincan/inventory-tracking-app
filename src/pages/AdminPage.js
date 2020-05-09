@@ -3,7 +3,8 @@ import styled from 'styled-components'
 
 import AddUser from "../components/AddUser"
 import UsersList from "../components/UsersList"
-import Modal from "../components/Modal"
+import UserModal from "../components/UserModal"
+import ProductModal from "../components/UserModal"
 import AddProduct from "../components/AddProduct"
 import ProductsList from "../components/ProductsList"
 
@@ -27,19 +28,30 @@ const AdminPage = () => {
     const [showContent, setShowContent] = useState("")
     const [newUserResult, setNewUserResult] = useState("");
     const [newProductResult, setNewProductResult] = useState("");
-    const [loginUserData, setUserLoginData] = useState({});
+    const [usersData, setUsersData] = useState({});
     const [productsData, setProductsData] = useState({});
-    const [showPortal, setShowPortal] = useState(false);
+    const [showUserModal, setShowUserModal] = useState(false);
+    const [showProductModal, setShowProductModal] = useState(false);
     const [selectedCustomerId, setSelectedCustomerId] = useState("");
+    const [selectedProductId, setSelectedProductId] = useState("");
     
 
-    const handleClickModal = (customerId) => {
+    const handleClickUserModal = (customerId) => {
       setSelectedCustomerId(customerId)  
-      setShowPortal(true)
+      setShowUserModal(true)
     }
 
-    const closeModal = () => {
-      setShowPortal(false);
+    const handleClickProductModal = (productId) => {
+      setSelectedProductId(productId)  
+      setShowProductModal(true)
+    }
+
+    const closeUserModal = () => {
+      setShowUserModal(false);
+    }
+
+    const closeProductModal = () => {
+      setShowProductModal(false);
     }
 
     const handleUserContent = () => setShowContent("user")
@@ -64,7 +76,7 @@ const AdminPage = () => {
           const fetchResponse = await fetch("https://5e9b1cde10bf9c0016dd1b23.mockapi.io/musteri", settings);
           const data = await fetchResponse.json();
           if(data){
-            getUserData();
+            getUsersData();
             setNewUserResult("success");
           }
         }
@@ -99,11 +111,11 @@ const AdminPage = () => {
     }
     
 
-      const getUserData = async () => {
+      const getUsersData = async () => {
         const response = await fetch("https://5e9b1cde10bf9c0016dd1b23.mockapi.io/musteri");
         const data = await response.json();
         const users = data.map(user => user)
-        setUserLoginData({
+        setUsersData({
           users : users,
         })
       }
@@ -118,15 +130,15 @@ const AdminPage = () => {
       }
 
       useEffect(() => {
-        const getUserData = async () => {
+        const getUsersData = async () => {
           const response = await fetch("https://5e9b1cde10bf9c0016dd1b23.mockapi.io/musteri");
           const data = await response.json();
           const users = data.map(user => user)
-          setUserLoginData({
+          setUsersData({
             users : users,
           })
         }
-        getUserData();
+        getUsersData();
       },[])
 
       useEffect(() => {
@@ -149,7 +161,7 @@ const AdminPage = () => {
           const fetchResponse = await fetch(`https://5e9b1cde10bf9c0016dd1b23.mockapi.io/musteri/${customerId}`, settings);
           const data = await fetchResponse.json();
           if(data){
-            getUserData();
+            getUsersData();
           }
         }
         catch(e) {
@@ -177,14 +189,14 @@ const AdminPage = () => {
       const UserPanel = () => (
             <>
             <AddUser addNewUser = {addNewUser} newUserResult = {newUserResult} />
-            <UsersList deleteUser={deleteUser} loginUserData = {loginUserData} handleClickModal={handleClickModal} />
+            <UsersList deleteUser={deleteUser} loginUserData = {usersData} handleClickModal={handleClickUserModal} />
             </>
       )
 
     const ProductPanel = () => (
       <>
       <AddProduct addNewProduct= {addNewProduct} newProductResult = {newProductResult} />
-      <ProductsList deleteProduct={deleteProduct} productsData = {productsData} handleClickModal={handleClickModal} />
+      <ProductsList deleteProduct={deleteProduct} productsData = {productsData} handleClickModal={handleClickProductModal} />
       </>
     )
 
@@ -201,7 +213,10 @@ const AdminPage = () => {
               showContent === "product" &&  <ProductPanel />
             }
             {
-            showPortal && <Modal data={loginUserData} customerId= {selectedCustomerId} closeModal={closeModal} getUserData={getUserData} />
+              showProductModal && <ProductModal formData={productsData} customerId= {selectedProductId} closeModal={closeProductModal} getProductsData={getProductsData} />
+            }
+            {
+              showUserModal && <UserModal formData={usersData} customerId= {selectedCustomerId} closeModal={closeUserModal} getUsersData={getUsersData} />
             }
         </div>
     )

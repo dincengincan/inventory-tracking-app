@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components'
 
@@ -26,8 +26,8 @@ padding-top: 50px;
 margin-top: 50px;
 `
 
-const Modal = ({closeModal, customerId, data, getData}) => {
-  const selectedData = data.users.find(user => {
+const UserModal = ({closeModal, customerId, formData, getUsersData}) => {
+  const selectedData = formData.users.find(user => {
     return user.customerId === customerId;
   })
 
@@ -52,7 +52,7 @@ const Modal = ({closeModal, customerId, data, getData}) => {
 
   const options = ["admin", "user"]
   
-  const [UserForm, inputStates] = useForm( labels, options, defaultStates)
+  const [userForm, inputStates] = useForm( labels, options, defaultStates)
   const [comboboxValue, usernameInputValue, passwordInputValue, nameInputValue, surnameInputValue, emailInputValue] = inputStates;
   
   const updateUser = async (customerId) => {
@@ -75,19 +75,19 @@ const Modal = ({closeModal, customerId, data, getData}) => {
         const fetchResponse = await fetch(`https://5e9b1cde10bf9c0016dd1b23.mockapi.io/musteri/${customerId}`, settings);
         const data = await fetchResponse.json();
         if(data){
-          getData();
           closeModal();
+          getUsersData();
         }
       }
       catch(e) {
         console.log(e);
       }
   }
-
+console.log("usermodal")
   return createPortal(
     <StyledModalContainer>
       <StyledFormContainer>
-        <UserForm />
+        {userForm()}
         <button className="button" onClick={() => updateUser(customerId)} >Kaydet</button>
         <button className="button list" onClick={closeModal}>Kapat</button>
       </StyledFormContainer>
@@ -95,4 +95,4 @@ const Modal = ({closeModal, customerId, data, getData}) => {
     )
 }
     
-export default Modal;
+export default UserModal;

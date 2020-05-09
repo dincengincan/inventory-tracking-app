@@ -20,7 +20,7 @@ const AddProduct = ({newProductResult, addNewProduct}) => {
       const [comboboxValue, productName, inventoryNumber] = inputStates;
 
     const handleClick = () => {
-        addNewProduct(productName, comboboxValue, inventoryNumber)
+        addNewProduct(comboboxValue, productName, inventoryNumber)
       }
 
     return(

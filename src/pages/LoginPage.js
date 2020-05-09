@@ -42,12 +42,10 @@ const LoginPage = () => {
     e.preventDefault();
     
     const selectedUserObject =  loginData.users.find(item => {
-      console.log(loginData)
       return item.username === username 
     })
     const isUserCorrect = selectedUserObject.password === password && selectedUserObject.userType === dropdownValue    
 
-    console.log(isUserCorrect)
     if( dropdownValue === "admin" && isUserCorrect) {
       setResult("success");
       history.push("/admin")
