@@ -13,10 +13,10 @@ const AddUser = ({addNewUser, newUserResult}) => {
   }
 
   const defaultStates = {
-    dropdown: "user"
+    dropdown: "customer"
   }
 
-  const options = ["admin", "user"]
+  const options = ["admin", "customer"]
 
   
   

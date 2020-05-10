@@ -12,8 +12,6 @@ const LoginPage = () => {
 
   const history= useHistory();
   
-
-
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   }
@@ -40,19 +38,24 @@ const LoginPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     
     const selectedUserObject =  loginData.users.find(item => {
       return item.username === username 
     })
-    const isUserCorrect = selectedUserObject.password === password && selectedUserObject.userType === dropdownValue    
 
-    if( dropdownValue === "admin" && isUserCorrect) {
-      setResult("success");
-      history.push("/admin")
-    }
-    if(dropdownValue === "user" && isUserCorrect){ 
-      setResult("success");
-      history.push("/customer")
+    if(selectedUserObject) {
+      const isUserCorrect = selectedUserObject.password === password && selectedUserObject.userType === dropdownValue    
+      if( dropdownValue === "admin" && isUserCorrect) {
+        setResult("success");
+        history.push("/admin")
+        return;
+      }
+      if(dropdownValue === "customer" && isUserCorrect){ 
+        setResult("success");
+        history.push("/customer")
+        return;
+      }
     }
     setResult("failure");
   }
