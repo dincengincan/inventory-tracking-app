@@ -1,30 +1,10 @@
 import React from 'react';
-import { createPortal } from 'react-dom';
-import styled from 'styled-components'
 
 import useForm from "../common/hooks"
 
-const modalRoot = document.getElementById("modal-root")
+import Modal from "./Modal"
 
-const StyledModalContainer = styled.div`
-position: fixed;
-left: 0;
-top: 0;
-bottom: 0;
-right: 0;
-background-color: rgba(0,0,0,0.5);
-color: #FFF;
-`
 
-const StyledFormContainer = styled.form`
-background-color: black; 
-height: 400px;
-width: 400px;
-margin: auto;
-text-align: center;
-padding-top: 50px;
-margin-top: 50px;
-`
 
 const ProductModal = ({closeModal, productId, formData, getProductsData}) => {
     console.log("productModal")
@@ -77,14 +57,12 @@ const ProductModal = ({closeModal, productId, formData, getProductsData}) => {
       }
   }
 
-  return createPortal(
-    <StyledModalContainer>
-      <StyledFormContainer>
+  return (
+    <Modal>
         {productForm()}
         <button className="button" onClick={() => updateUser(productId)} >Kaydet</button>
         <button className="button list" onClick={closeModal}>Kapat</button>
-      </StyledFormContainer>
-    </StyledModalContainer>, modalRoot
+    </Modal>
     )
 }
     
