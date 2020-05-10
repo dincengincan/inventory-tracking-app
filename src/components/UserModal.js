@@ -33,8 +33,7 @@ const UserModal = ({closeModal, customerId, formData, getUsersData}) => {
   const [userForm, inputStates] = useForm( labels, options, defaultStates)
   const [comboboxValue, usernameInputValue, passwordInputValue, nameInputValue, surnameInputValue, emailInputValue] = inputStates;
   
-  const updateUser = async (customerId) => {
-      console.log(customerId)
+  const updateUser = async () => {
       const settings = {
         method: "PUT",
         body: JSON.stringify({
@@ -65,7 +64,7 @@ console.log("usermodal")
   return (
     <Modal>
         {userForm()}
-        <button className="button" onClick={() => updateUser(customerId)} >Kaydet</button>
+        <button className="button" onClick={updateUser} >Kaydet</button>
         <button className="button list" onClick={closeModal}>Kapat</button>
     </Modal>
     )

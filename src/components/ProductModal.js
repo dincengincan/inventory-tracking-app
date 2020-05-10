@@ -7,13 +7,10 @@ import Modal from "./Modal"
 
 
 const ProductModal = ({closeModal, productId, formData, getProductsData}) => {
-    console.log("productModal")
     const selectedData = formData.products.find(product => {
     return product.productId === productId;
   })
-  console.log(selectedData)
-
-
+  
   const labels = {
     dropdown: "Kategori Adı",
     firstInput: "Ürün İsmi",
@@ -31,8 +28,7 @@ const ProductModal = ({closeModal, productId, formData, getProductsData}) => {
   const [productForm, inputStates] = useForm( labels, options, defaultStates)
   const [comboboxValue, productNameValue, inventoryNumberValue] = inputStates;
   
-  const updateUser = async (customerId) => {
-      console.log(customerId)
+  const updateProduct = async () => {
       const settings = {
         method: "PUT",
         body: JSON.stringify({
@@ -60,7 +56,7 @@ const ProductModal = ({closeModal, productId, formData, getProductsData}) => {
   return (
     <Modal>
         {productForm()}
-        <button className="button" onClick={() => updateUser(productId)} >Kaydet</button>
+        <button className="button" onClick={updateProduct} >Kaydet</button>
         <button className="button list" onClick={closeModal}>Kapat</button>
     </Modal>
     )

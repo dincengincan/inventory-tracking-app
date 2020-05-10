@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import AddUser from "../components/AddUser"
 import UsersList from "../components/UsersList"
 import UserModal from "../components/UserModal"
-import ProductModal from "../components/UserModal"
+import ProductModal from "../components/ProductModal"
 import AddProduct from "../components/AddProduct"
 import ProductsList from "../components/ProductsList"
 
@@ -213,7 +213,7 @@ const AdminPage = () => {
               showContent === "product" &&  <ProductPanel />
             }
             {
-              showProductModal && <ProductModal formData={productsData} customerId= {selectedProductId} closeModal={closeProductModal} getProductsData={getProductsData} />
+              showProductModal && <ProductModal formData={productsData} productId= {selectedProductId} closeModal={closeProductModal} getProductsData={getProductsData} />
             }
             {
               showUserModal && <UserModal formData={usersData} customerId= {selectedCustomerId} closeModal={closeUserModal} getUsersData={getUsersData} />
