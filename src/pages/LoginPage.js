@@ -4,9 +4,9 @@ import {useHistory} from 'react-router-dom';
 import '../App.css';
 
 const LoginPage = () => {
-  const [username, setUsername] = useState("sdinc");
+  const [username, setUsername] = useState("ecdinc");
   const [password, setPassword] = useState("12345");
-  const [dropdownValue, setDropdownValue] = useState("customer");
+  const [dropdownValue, setDropdownValue] = useState("admin");
   const [loginData, setLoginData] = useState({})
   const [result, setResult] = useState("");
 

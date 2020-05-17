@@ -30,6 +30,7 @@ const AdminPage = () => {
     const [newProductResult, setNewProductResult] = useState("");
     const [usersData, setUsersData] = useState({});
     const [productsData, setProductsData] = useState({});
+    const [notifications, setNotifications] = useState([]);
     const [showUserModal, setShowUserModal] = useState(false);
     const [showProductModal, setShowProductModal] = useState(false);
     const [selectedCustomerId, setSelectedCustomerId] = useState("");
@@ -142,6 +143,22 @@ const AdminPage = () => {
       },[])
 
       useEffect(() => {
+        const getNotifications = async () => {
+          try {
+            const fetchResponse = await fetch("https://5e9b1cde10bf9c0016dd1b23.mockapi.io/orders");
+            const data = await fetchResponse.json();
+            if(data){
+              setNotifications(data)
+            }
+          }
+          catch(e) {
+            console.log(e);
+          }
+      }
+      getNotifications()
+      },[])
+
+      useEffect(() => {
         const getProductsData = async () => {
           const response = await fetch("https://5e9b1cde10bf9c0016dd1b23.mockapi.io/inventory");
           const data = await response.json();
@@ -218,6 +235,17 @@ const AdminPage = () => {
             {
               showUserModal && <UserModal formData={usersData} customerId= {selectedCustomerId} closeModal={closeUserModal} getUsersData={getUsersData} />
             }
+            <h2>Bildirimler</h2>
+            <ul>
+              {
+                notifications.map(notification => {
+                return(
+                <li><b>{`${notification.orderOwner.user.name} ${notification.orderOwner.user.surname} 
+                ${notification.createdAt}`}</b> tarihinde <b>{`${notification.orderNumber}`}</b> adet <b>{`${notification.orderName}`}</b> talep etti.</li>
+                )
+                })
+              }
+            </ul>
         </div>
     )
 }
