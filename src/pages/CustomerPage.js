@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from "react";
-import {useHistory} from 'react-router-dom';
+import {useHistory, useLocation} from 'react-router-dom';
 
 import ProductsListCustomer from "../components/ProductsListCustomer"
 
 const CustomerPage = () => {
+    const location = useLocation()
     const history = useHistory()
+    const {state} = location
     const [productsData, setProductsData] = useState({});
 
     const handleRequestClick = (productId) => {
@@ -12,7 +14,7 @@ const CustomerPage = () => {
         const selectedData = productsData.products.find(product => {
             return product.productId === productId;
           })
-        history.push({pathname: "/request", state: selectedData})
+        history.push({pathname: "/request", state: {...state, selectedData}})
     }
 
     useEffect(() => {

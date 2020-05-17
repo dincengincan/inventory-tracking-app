@@ -4,9 +4,9 @@ import {useHistory} from 'react-router-dom';
 import '../App.css';
 
 const LoginPage = () => {
-  const [username, setUsername] = useState("ecdinc");
+  const [username, setUsername] = useState("sdinc");
   const [password, setPassword] = useState("12345");
-  const [dropdownValue, setDropdownValue] = useState("admin");
+  const [dropdownValue, setDropdownValue] = useState("customer");
   const [loginData, setLoginData] = useState({})
   const [result, setResult] = useState("");
 
@@ -53,7 +53,7 @@ const LoginPage = () => {
       }
       if(dropdownValue === "customer" && isUserCorrect){ 
         setResult("success");
-        history.push("/customer")
+        history.push({pathname: "/customer", state: {userInfo: selectedUserObject}})
         return;
       }
     }

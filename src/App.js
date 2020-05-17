@@ -6,6 +6,7 @@ import CustomerPage from "./pages/CustomerPage"
 import AdminPage from "./pages/AdminPage"
 import RequestPage from "./pages/RequestPage"
 import RequestSubmitPage from "./pages/RequestSubmitPage"
+import SuccessPage from "./pages/SuccessPage"
 import Header from "./components/Header"
 
 
@@ -19,6 +20,7 @@ const App = () => {
         <Route exact path="/customer" component={CustomerPage}/>
         <Route exact path="/request" component={RequestPage}/>
         <Route exact path="/request-submit" component={RequestSubmitPage}/>
+        <Route exact path="/request-success" component={SuccessPage}/>
       </Switch>
     </div>
   )
