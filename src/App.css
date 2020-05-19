@@ -5,12 +5,14 @@
 .App {
   text-align: center;
   margin: auto;
-  background-color: darkslategray;
-  width: 40%;
+  margin-top: 50px;
+  width: 20%;
   min-width: 400px;
   height: 350px;
-  border-radius: 10px;
-  color: rgb(209, 209, 209);
+  border-radius: 20px;
+  color: rgb(100, 100, 100);
+  box-shadow: 0px 0px 20px 1px grey;
+  padding: 20px 10px;
 }
 
 .list-item {
@@ -19,7 +21,7 @@
 
 .header {
   width: 100%;
-  background-color: darkgreen;
+  background-color: #3f51b5;
   height: 50px;
   box-shadow: 0px 0px 5px 0px rgb(153, 153, 153);
 

@@ -1,7 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+import Button from '@material-ui/core/Button';
 
 import '../App.css';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& .MuiTextField-root': {
+      margin: theme.spacing(1),
+      width: 200,
+    },
+  },
+}));
 
 const LoginPage = () => {
   const [username, setUsername] = useState('ecdinc');
@@ -11,6 +26,8 @@ const LoginPage = () => {
   const [result, setResult] = useState('');
 
   const history = useHistory();
+
+  const classes = useStyles();
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -68,39 +85,43 @@ const LoginPage = () => {
   return (
     <div className="App">
       <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="input-area">
-          <label htmlFor="username-field">User Name</label>
-          <input
-            className="input"
-            onChange={handleUsernameChange}
-            value={username}
-            name="username-field"
-            type="text"
-          />
-        </div>
-        <div className="input-area">
-          <label htmlFor="password-field">Password</label>
-          <input
-            className="input"
-            onChange={handlePasswordChange}
-            value={password}
-            name="password-field"
-            type="password"
-          />
-        </div>
-        <div className="input-area">
-          <label>User Type</label>
-          <select
-            className="input"
+      <form
+        onSubmit={handleSubmit}
+        className={classes.root}
+        noValidate
+        autoComplete="off"
+      >
+        <div>
+          <InputLabel id="demo-simple-select-label">Kullanıcı Tipi</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
             value={dropdownValue}
             onChange={handleDropdownChange}
           >
-            <option value="customer">Müşteri</option>
-            <option value="admin">Yönetici</option>
-          </select>
+            <MenuItem value="customer">Müşteri</MenuItem>
+            <MenuItem value="admin">Yönetici</MenuItem>
+          </Select>
         </div>
-        <button className="button">Login</button>
+        <div>
+          <TextField
+            id="standard-basic"
+            label="Kullanıcı Adı"
+            value={username}
+            onChange={handleUsernameChange}
+          />
+        </div>
+        <div>
+          <TextField
+            id="standard-basic"
+            label="Şifre"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+        </div>
+        <Button variant="contained" color="primary" onClick={handleSubmit}>
+          Giriş Yap
+        </Button>
 
         {result === 'success' && (
           <div>
