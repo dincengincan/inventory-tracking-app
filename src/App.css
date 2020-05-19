@@ -1,53 +1,49 @@
-*{
+* {
   font-family: 'Century Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-
 .App {
   text-align: center;
-  margin:auto;
+  margin: auto;
   background-color: darkslategray;
   width: 40%;
   min-width: 400px;
   height: 350px;
   border-radius: 10px;
-  color:rgb(209, 209, 209);
+  color: rgb(209, 209, 209);
 }
 
-.list-item{
+.list-item {
   padding-bottom: 10px;
 }
 
-.header{
+.header {
   width: 100%;
   background-color: darkgreen;
   height: 50px;
   box-shadow: 0px 0px 5px 0px rgb(153, 153, 153);
 
-  display:flex;
+  display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.input{
-  display:block;
+.input {
+  display: block;
   margin: auto;
-
 }
 
-.input-area{
-  margin-top:20px;
+.input-area {
+  margin-top: 20px;
 }
 
-.button{
-  margin-top:20px;
-  padding:5px 10px;
+.button {
+  margin-top: 20px;
+  padding: 5px 10px;
   background-color: rgb(105, 83, 101);
-  border:none;
+  border: none;
   color: rgb(209, 209, 209);
-  cursor:pointer;
-
-  
+  cursor: pointer;
 }
 
 .button:hover {
@@ -58,19 +54,15 @@
   background-color: rgb(126, 125, 125);
 }
 
-
 .list {
-  margin-left:20px;
+  margin-left: 20px;
 }
 
-
-.new-user-form-input{
-  display:block;
+.new-user-form-input {
+  display: block;
 }
 
-.portal-form-input{
-  display:block;
-  margin:auto;
+.portal-form-input {
+  display: block;
+  margin: auto;
 }
-
-
