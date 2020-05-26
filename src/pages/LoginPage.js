@@ -92,16 +92,16 @@ const LoginPage = () => {
         autoComplete="off"
       >
         <div>
-          <InputLabel id="demo-simple-select-label">Kullanıcı Tipi</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
+          <TextField
+            id="standard-select-usertype"
+            select
+            label="Kullanıcı Tipi"
             value={dropdownValue}
             onChange={handleDropdownChange}
           >
             <MenuItem value="customer">Müşteri</MenuItem>
             <MenuItem value="admin">Yönetici</MenuItem>
-          </Select>
+          </TextField>
         </div>
         <div>
           <TextField

@@ -1,7 +1,22 @@
 import React, { useState } from 'react';
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 import '../App.css';
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& .MuiTextField-root': {
+      margin: theme.spacing(1),
+      width: 200,
+    },
+  },
+}));
+
 const useForm = (labels, options, defaultStates) => {
+  const classes = useStyles();
   const [inputValues, setInputValues] = useState({
     dropdownInputValue: options[1],
     firstInputValue: defaultStates.firstInput || '',
@@ -17,107 +32,89 @@ const useForm = (labels, options, defaultStates) => {
   };
 
   const form = () => (
-    <form>
+    <form className={classes.root} noValidate autoComplete="off">
       {labels.dropdown && (
-        <div className="input-area">
-          {labels.dropdown}
-          <select
-            className="new-user-form-input"
+        <div>
+          <TextField
+            id="standard-select-usertype"
+            select
+            label="Kullanıcı Tipi"
             value={inputValues.dropdownInputValue}
             onChange={(e) => genericHandleChange('dropdownInputValue', e)}
+            variant="outlined"
           >
             {options.map((option) => {
-              return (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              );
+              return <MenuItem value={option}>{option}</MenuItem>;
             })}
-          </select>
+          </TextField>
         </div>
       )}
+
       {labels.firstInput && (
-        <div className="input-area">
-          <label>
-            {labels.firstInput}
-            <input
-              key={labels.firstInput}
-              className="new-user-form-input"
-              type="text"
-              value={inputValues.firstInputValue}
-              onChange={(e) => genericHandleChange('firstInputValue', e)}
-            />
-          </label>
+        <div>
+          <TextField
+            id="outlined-basic"
+            variant="outlined"
+            label={labels.firstInput}
+            value={inputValues.firstInputValue}
+            onChange={(e) => genericHandleChange('firstInputValue', e)}
+            required
+          />
         </div>
       )}
       {labels.secondInput && (
-        <div className="input-area">
-          <label>
-            {labels.secondInput}
-            <input
-              key={labels.secondInput}
-              className="new-user-form-input"
-              type="text"
-              value={inputValues.secondInputValue}
-              onChange={(e) => genericHandleChange('secondInputValue', e)}
-            />
-          </label>
+        <div>
+          <TextField
+            id="outlined-basic"
+            variant="outlined"
+            label={labels.secondInput}
+            value={inputValues.secondInputValue}
+            onChange={(e) => genericHandleChange('secondInputValue', e)}
+          />
         </div>
       )}
       {labels.thirdInput && (
-        <div className="input-area">
-          <label>
-            {labels.thirdInput}
-            <input
-              key={labels.thirdInput}
-              className="new-user-form-input"
-              type="text"
-              value={inputValues.thirdInputValue}
-              onChange={(e) => genericHandleChange('thirdInputValue', e)}
-            />
-          </label>
+        <div>
+          <TextField
+            id="outlined-basic"
+            variant="outlined"
+            label={labels.thirdInput}
+            value={inputValues.thirdInputValue}
+            onChange={(e) => genericHandleChange('thirdInputValue', e)}
+          />
         </div>
       )}
       {labels.fourthInput && (
-        <div className="input-area">
-          <label>
-            {labels.fourthInput}
-            <input
-              key={labels.fourthInput}
-              className="new-user-form-input"
-              type="text"
-              value={inputValues.fourthInputValue}
-              onChange={(e) => genericHandleChange('fourthInputValue', e)}
-            />
-          </label>
+        <div>
+          <TextField
+            id="outlined-basic"
+            variant="outlined"
+            label={labels.fourthInput}
+            value={inputValues.fourthInputValue}
+            onChange={(e) => genericHandleChange('fourthInputValue', e)}
+          />
         </div>
       )}
       {labels.fifthInput && (
-        <div className="input-area">
-          <label>
-            {labels.fifthInput}
-            <input
-              key={labels.fifthInput}
-              className="new-user-form-input"
-              type="text"
-              value={inputValues.fifthInputValue}
-              onChange={(e) => genericHandleChange('fifthInputValue', e)}
-            />
-          </label>
+        <div>
+          <TextField
+            id="outlined-basic"
+            variant="outlined"
+            label={labels.fifthInput}
+            value={inputValues.fifthInputValue}
+            onChange={(e) => genericHandleChange('fifthInputValue', e)}
+          />
         </div>
       )}
       {labels.sixthInput && (
-        <div className="input-area">
-          <label>
-            {labels.sixthInput}
-            <input
-              key={labels.sixthInput}
-              className="new-user-form-input"
-              type="text"
-              value={inputValues.sixthInputValue}
-              onChange={(e) => genericHandleChange('sixthInputValue', e)}
-            />
-          </label>
+        <div>
+          <TextField
+            id="outlined-basic"
+            variant="outlined"
+            label={labels.sixthInput}
+            value={inputValues.sixthInputValue}
+            onChange={(e) => genericHandleChange('sixthInputValue', e)}
+          />
         </div>
       )}
     </form>

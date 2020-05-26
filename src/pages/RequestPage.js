@@ -15,6 +15,8 @@ const RequestPage = () => {
   const handleRequestClick = () => {
     if (Number(requestedNumber) > Number(state.selectedData.inventoryNumber)) {
       setShowError(true);
+    } else if (!requestedNumber.length) {
+      return;
     } else {
       history.push({
         pathname: '/request-submit',

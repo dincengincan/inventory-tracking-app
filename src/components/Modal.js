@@ -13,7 +13,7 @@ const StyledModalContainer = styled.div`
 `;
 
 const StyledFormContainer = styled.form`
-  background-color: black;
+  background-color: white;
   height: 400px;
   width: 400px;
   margin: auto;
