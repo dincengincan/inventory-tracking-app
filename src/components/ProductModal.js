@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import useForm from '../common/hooks';
+import Notification from './Notification';
 
 import Modal from './Modal';
 
 const ProductModal = ({ closeModal, productId, formData, getProductsData }) => {
+  const [showError, setShowError] = useState(false);
+
   const selectedData = formData.products.find((product) => {
     return product.productId === productId;
   });
@@ -27,6 +30,10 @@ const ProductModal = ({ closeModal, productId, formData, getProductsData }) => {
   const [comboboxValue, productNameValue, inventoryNumberValue] = inputStates;
 
   const updateProduct = async () => {
+    if (!productNameValue.length || !inventoryNumberValue.length) {
+      setShowError(true);
+      return;
+    }
     const settings = {
       method: 'PUT',
       body: JSON.stringify({
@@ -56,6 +63,9 @@ const ProductModal = ({ closeModal, productId, formData, getProductsData }) => {
   return (
     <Modal>
       {productForm()}
+      {showError && (
+        <Notification notificationText="* işaretli alanlar gereklidir" />
+      )}
       <button className="button" onClick={updateProduct}>
         Kaydet
       </button>

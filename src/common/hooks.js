@@ -42,6 +42,7 @@ const useForm = (labels, options, defaultStates) => {
             value={inputValues.dropdownInputValue}
             onChange={(e) => genericHandleChange('dropdownInputValue', e)}
             variant="outlined"
+            required
           >
             {options.map((option) => {
               return <MenuItem value={option}>{option}</MenuItem>;
@@ -70,6 +71,7 @@ const useForm = (labels, options, defaultStates) => {
             label={labels.secondInput}
             value={inputValues.secondInputValue}
             onChange={(e) => genericHandleChange('secondInputValue', e)}
+            required
           />
         </div>
       )}
@@ -81,6 +83,7 @@ const useForm = (labels, options, defaultStates) => {
             label={labels.thirdInput}
             value={inputValues.thirdInputValue}
             onChange={(e) => genericHandleChange('thirdInputValue', e)}
+            required
           />
         </div>
       )}
@@ -92,6 +95,7 @@ const useForm = (labels, options, defaultStates) => {
             label={labels.fourthInput}
             value={inputValues.fourthInputValue}
             onChange={(e) => genericHandleChange('fourthInputValue', e)}
+            required
           />
         </div>
       )}
@@ -103,6 +107,7 @@ const useForm = (labels, options, defaultStates) => {
             label={labels.fifthInput}
             value={inputValues.fifthInputValue}
             onChange={(e) => genericHandleChange('fifthInputValue', e)}
+            required
           />
         </div>
       )}
@@ -114,6 +119,7 @@ const useForm = (labels, options, defaultStates) => {
             label={labels.sixthInput}
             value={inputValues.sixthInputValue}
             onChange={(e) => genericHandleChange('sixthInputValue', e)}
+            required
           />
         </div>
       )}

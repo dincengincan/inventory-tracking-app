@@ -240,6 +240,7 @@ const AdminPage = () => {
       <AddProduct
         addNewProduct={addNewProduct}
         newProductResult={newProductResult}
+        closeNotification={closeNotification}
       />
       <ProductsList
         deleteProduct={deleteProduct}
@@ -248,6 +249,8 @@ const AdminPage = () => {
       />
     </>
   );
+
+  const closeNotification = () => setNewProductResult('');
 
   return (
     <div>

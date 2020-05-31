@@ -1,7 +1,12 @@
-import React from 'react';
-import useForm from '../common/hooks';
+import React, { useState } from 'react';
+import Snackbar from '@material-ui/core/Snackbar';
 
-const AddProduct = ({ newProductResult, addNewProduct }) => {
+import useForm from '../common/hooks';
+import Notification from './Notification';
+
+const AddProduct = ({ newProductResult, addNewProduct, closeNotification }) => {
+  const [showError, setShowError] = useState(false);
+
   const labels = {
     dropdown: 'Kategori Adı',
     firstInput: 'Ürün İsmi',
@@ -18,18 +23,33 @@ const AddProduct = ({ newProductResult, addNewProduct }) => {
   const [comboboxValue, productName, inventoryNumber] = inputStates;
 
   const handleClick = () => {
-    addNewProduct(comboboxValue, productName, inventoryNumber);
+    if (inventoryNumber.length && productName.length) {
+      addNewProduct(comboboxValue, productName, inventoryNumber);
+    } else {
+      setShowError(true);
+    }
   };
 
+  //snackbar disappears due to twice rendering problem
   return (
     <>
       {productForm()}
       {/*can not use as < ProductFrom /> due to problem of re-rendering */}
+      {showError && (
+        <Notification notificationText="* işaretli alanlar gereklidir" />
+      )}
       <button className="button" onClick={handleClick}>
         Add
       </button>
-      {newProductResult === 'success' && <h2>Yeni Ürün Başarıyla Eklendi!</h2>}
-      {newProductResult === 'failure' && <h2>Ürün eklenemedi!</h2>}
+
+      <Snackbar
+        open={newProductResult === 'success'}
+        autoHideDuration={5000}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        message="Yeni ürün başarıyla eklendi"
+        key={('top', 'center')}
+        onClose={closeNotification}
+      />
     </>
   );
 };

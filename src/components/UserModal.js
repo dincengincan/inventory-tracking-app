@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import useForm from '../common/hooks';
+import Notification from './Notification';
 
 import Modal from './Modal';
 
 const UserModal = ({ closeModal, customerId, formData, getUsersData }) => {
+  const [showError, setShowError] = useState(false);
+
   const selectedData = formData.users.find((user) => {
     return user.customerId === customerId;
   });
@@ -40,6 +43,17 @@ const UserModal = ({ closeModal, customerId, formData, getUsersData }) => {
   ] = inputStates;
 
   const updateUser = async () => {
+    if (
+      !usernameInputValue.length ||
+      !passwordInputValue.length ||
+      !nameInputValue.length ||
+      !surnameInputValue.length ||
+      !emailInputValue
+    ) {
+      setShowError(true);
+      return;
+    }
+
     const settings = {
       method: 'PUT',
       body: JSON.stringify({
@@ -72,6 +86,9 @@ const UserModal = ({ closeModal, customerId, formData, getUsersData }) => {
   return (
     <Modal>
       {userForm()}
+      {showError && (
+        <Notification notificationText="* işaretli alanlar gereklidir" />
+      )}
       <button className="button" onClick={updateUser}>
         Kaydet
       </button>
