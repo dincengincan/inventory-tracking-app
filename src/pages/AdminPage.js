@@ -7,6 +7,7 @@ import UserModal from '../components/UserModal';
 import ProductModal from '../components/ProductModal';
 import AddProduct from '../components/AddProduct';
 import ProductsList from '../components/ProductsList';
+import FormLayout from '../components/FormLayout';
 
 const StyledContentButton = styled.button`
   margin-top: 20px;
@@ -14,14 +15,28 @@ const StyledContentButton = styled.button`
   background-color: ${({ selectedContent }) =>
     selectedContent ? 'rgb(155, 83, 101)' : 'rgb(105, 83, 101)'};
   border: none;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
   color: rgb(209, 209, 209);
   cursor: pointer;
   outline: none;
-  padding: 10px 20px;
+  padding: 10px 50px;
 
   :hover {
     background-color: rgb(17, 9, 15);
   }
+`;
+
+const StyledContentButtonSecond = styled(StyledContentButton)`
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  padding: 10px 40px;
 `;
 
 const AdminPage = () => {
@@ -226,7 +241,11 @@ const AdminPage = () => {
 
   const UserPanel = () => (
     <>
-      <AddUser addNewUser={addNewUser} newUserResult={newUserResult} />
+      <AddUser
+        addNewUser={addNewUser}
+        newUserResult={newUserResult}
+        closeNotification={closeNotification}
+      />
       <UsersList
         deleteUser={deleteUser}
         loginUserData={usersData}
@@ -250,23 +269,28 @@ const AdminPage = () => {
     </>
   );
 
-  const closeNotification = () => setNewProductResult('');
+  const closeNotification = () => {
+    setNewProductResult("");
+    setNewUserResult("")
+  };
 
   return (
-    <div>
-      <h1>Admin Page</h1>
-      <StyledContentButton
-        selectedContent={showContent === 'user'}
-        onClick={handleUserContent}
-      >
-        User Panel
-      </StyledContentButton>
-      <StyledContentButton
-        selectedContent={showContent === 'product'}
-        onClick={handleProductContent}
-      >
-        Product Panel
-      </StyledContentButton>
+    <FormLayout>
+      <h2>Admin Panel</h2>
+      <ButtonContainer>
+        <StyledContentButton
+          selectedContent={showContent === 'user'}
+          onClick={handleUserContent}
+        >
+          User Panel
+        </StyledContentButton>
+        <StyledContentButtonSecond
+          selectedContent={showContent === 'product'}
+          onClick={handleProductContent}
+        >
+          Product Panel
+        </StyledContentButtonSecond>
+      </ButtonContainer>
       {showContent === 'user' && <UserPanel />}
 
       {showContent === 'product' && <ProductPanel />}
@@ -286,7 +310,7 @@ const AdminPage = () => {
           getUsersData={getUsersData}
         />
       )}
-      <h2>Bildirimler</h2>
+      <h3 class="notification-label">Kullanıcı Bildirimleri</h3>
       <ul>
         {notifications.map((notification) => {
           return (
@@ -299,7 +323,7 @@ const AdminPage = () => {
           );
         })}
       </ul>
-    </div>
+    </FormLayout>
   );
 };
 

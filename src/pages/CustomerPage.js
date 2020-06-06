@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 
 import ProductsListCustomer from '../components/ProductsListCustomer';
+import FormLayout from '../components/FormLayout';
 
 const CustomerPage = () => {
   const location = useLocation();
@@ -32,13 +33,13 @@ const CustomerPage = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Customer Page</h1>
+    <FormLayout>
+      <h2>Müşteri Paneli</h2>
       <ProductsListCustomer
         handleRequestClick={handleRequestClick}
         productsData={productsData}
       />
-    </div>
+    </FormLayout>
   );
 };
 

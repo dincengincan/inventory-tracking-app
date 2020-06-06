@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import Snackbar from '@material-ui/core/Snackbar';
 
 import useForm from '../common/hooks';
 import Notification from './Notification';
 
-const AddUser = ({ addNewUser, newUserResult }) => {
+const AddUser = ({ addNewUser, newUserResult, closeNotification }) => {
   const [showError, setShowError] = useState(false);
 
   const labels = {
@@ -56,18 +57,24 @@ const AddUser = ({ addNewUser, newUserResult }) => {
 
   return (
     <>
-      {userForm()}
-      {/*can not use as < UserForm /> due to problem of re-rendering */}
-      {showError && (
-        <Notification notificationText="* işaretli alanlar gereklidir" />
-      )}
-      <button className="button" onClick={handleClick}>
-        Add
-      </button>
-      {newUserResult === 'success' && (
-        <h2>Yeni kullanıcı başarıyla eklendi!</h2>
-      )}
-      {newUserResult === 'failure' && <h2>Kullanıcı eklenemedi!</h2>}
+      <div class="form">
+        {userForm()}
+        {/*can not use as < UserForm /> due to problem of re-rendering */}
+        {showError && (
+          <Notification notificationText="* işaretli alanlar gereklidir" />
+        )}
+        <button className="button" onClick={handleClick}>
+          Add
+        </button>
+      </div>
+      <Snackbar
+        open={newUserResult === 'success'}
+        autoHideDuration={5000}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+        message="Yeni kullanıcı başarıyla eklendi"
+        key={('top', 'center')}
+        onClose={closeNotification}
+      />
     </>
   );
 };

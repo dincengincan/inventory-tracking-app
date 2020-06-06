@@ -1,6 +1,8 @@
 import React from 'react';
 import { useLocation, useHistory, Link } from 'react-router-dom';
 
+import FormLayout from '../components/FormLayout';
+
 const RequestSubmitPage = () => {
   const location = useLocation();
   const history = useHistory();
@@ -76,29 +78,32 @@ const RequestSubmitPage = () => {
   };
 
   return (
-    <div>
-      <h1>Request Submit Page</h1>
-      <label>Ürün İsmi</label>
-      <h3>{state.selectedData.productName}</h3>
-      <label>Ürün Kategorisi</label>
-      <h3>{state.selectedData.categoryName}</h3>
-      <label>Stok Sayısı</label>
-      <h3>{state.selectedData.inventoryNumber}</h3>
-      <label>Talep Edilen Sayı</label>
-      <h3>{state.requestedNumber}</h3>
-      <Link to="/customer">
-        <button>Geri Dön</button>
-      </Link>
+    <FormLayout>
+      <div class="request-form">
+        <label>Ürün İsmi</label>
+        <h4>{state.selectedData.productName}</h4>
+        <label>Ürün Kategorisi</label>
+        <h4>{state.selectedData.categoryName}</h4>
+        <label>Stok Sayısı</label>
+        <h4>{state.selectedData.inventoryNumber}</h4>
+        <label>Talep Edilen Sayı</label>
+        <h4>{state.requestedNumber}</h4>
+      </div>
       <Link
         to={{
           pathname: '/request',
           state: state,
         }}
       >
-        <button>Düzelt</button>
+        <button class="button stepper">Düzelt</button>
       </Link>
-      <button onClick={handleClick}>Onayla</button>
-    </div>
+      <Link to="/customer">
+        <button class="button stepper">Geri Dön</button>
+      </Link>
+      <button class="button stepper" onClick={handleClick}>
+        Onayla
+      </button>
+    </FormLayout>
   );
 };
 

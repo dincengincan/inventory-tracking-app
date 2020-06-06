@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import useForm from '../common/hooks';
 import Notification from './Notification';
 
-import Modal from './Modal';
+import ModalMui from './ModalMui';
 
 const UserModal = ({ closeModal, customerId, formData, getUsersData }) => {
   const [showError, setShowError] = useState(false);
@@ -84,18 +84,18 @@ const UserModal = ({ closeModal, customerId, formData, getUsersData }) => {
   };
   console.log('usermodal');
   return (
-    <Modal>
+    <ModalMui>
       {userForm()}
       {showError && (
         <Notification notificationText="* işaretli alanlar gereklidir" />
       )}
-      <button className="button" onClick={updateUser}>
+      <button className="button modal" onClick={updateUser}>
         Kaydet
       </button>
-      <button className="button list" onClick={closeModal}>
+      <button className="button modal" onClick={closeModal}>
         Kapat
       </button>
-    </Modal>
+    </ModalMui>
   );
 };
 

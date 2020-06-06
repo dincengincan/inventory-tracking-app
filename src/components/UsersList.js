@@ -17,11 +17,11 @@ const useStyles = makeStyles({
 const UsersList = ({ loginUserData, deleteUser, handleClickModal }) => {
   const classes = useStyles();
   return (
-    <div>
-      <h2>
-        Mevcut Kullanıcılar (Toplam{' '}
-        {loginUserData.users && loginUserData.users.length} adet)
-      </h2>
+    <>
+      <h3 class="table-label">
+        Mevcut Kullanıcılar ({loginUserData.users && loginUserData.users.length}{' '}
+        adet)
+      </h3>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
@@ -50,13 +50,13 @@ const UsersList = ({ loginUserData, deleteUser, handleClickModal }) => {
                   <TableCell align="center">
                     <button
                       onClick={() => handleClickModal(item.customerId)}
-                      className="button list"
+                      className="button button-list"
                     >
                       Düzenle
                     </button>
                     <button
                       onClick={() => deleteUser(item.customerId)}
-                      className="button list"
+                      className="button button-list"
                     >
                       Sil
                     </button>
@@ -66,7 +66,7 @@ const UsersList = ({ loginUserData, deleteUser, handleClickModal }) => {
           </TableBody>
         </Table>
       </TableContainer>
-    </div>
+    </>
   );
 };
 

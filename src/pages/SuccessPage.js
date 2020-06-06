@@ -1,26 +1,30 @@
 import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
 
+import FormLayout from '../components/FormLayout';
+
 const SuccessPage = () => {
   const location = useLocation();
   const { state } = location;
 
   return (
-    <div>
-      <h1>Talebiniz Başarıyla Oluşturuldu</h1>
-      <label>Talep Edilen Ürün İsmi</label>
-      <h3>{state.selectedData.productName}</h3>
-      <label>Talep Edilen Ürün Kategorisi</label>
-      <h3>{state.selectedData.categoryName}</h3>
-      <label>Talep Edilen Ürün Sayısı</label>
-      <h3>{state.requestedNumber}</h3>
+    <FormLayout>
+      <h2>Talebiniz Başarıyla Oluşturuldu</h2>
+      <div class="request-form">
+        <label>Talep Edilen Ürün İsmi</label>
+        <h4>{state.selectedData.productName}</h4>
+        <label>Talep Edilen Ürün Kategorisi</label>
+        <h4>{state.selectedData.categoryName}</h4>
+        <label>Talep Edilen Ürün Sayısı</label>
+        <h4>{state.requestedNumber}</h4>
+      </div>
       <Link to="/customer">
-        <button>Müşteri Sayfasına Dön</button>
+        <button class="button stepper">Müşteri Paneline Dön</button>
       </Link>
       <Link to="/">
-        <button>Çıkış Yap</button>
+        <button class="button stepper">Çıkış Yap</button>
       </Link>
-    </div>
+    </FormLayout>
   );
 };
 

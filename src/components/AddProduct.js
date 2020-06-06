@@ -33,15 +33,16 @@ const AddProduct = ({ newProductResult, addNewProduct, closeNotification }) => {
   //snackbar disappears due to twice rendering problem
   return (
     <>
-      {productForm()}
-      {/*can not use as < ProductFrom /> due to problem of re-rendering */}
-      {showError && (
-        <Notification notificationText="* işaretli alanlar gereklidir" />
-      )}
-      <button className="button" onClick={handleClick}>
-        Add
-      </button>
-
+      <div class="form">
+        {productForm()}
+        {/*can not use as < ProductFrom /> due to problem of re-rendering */}
+        {showError && (
+          <Notification notificationText="* işaretli alanlar gereklidir" />
+        )}
+        <button className="button" onClick={handleClick}>
+          Add
+        </button>
+      </div>
       <Snackbar
         open={newProductResult === 'success'}
         autoHideDuration={5000}

@@ -18,7 +18,11 @@ const ProductsList = ({ productsData, deleteProduct, handleClickModal }) => {
   const classes = useStyles();
 
   return (
-    <div>
+    <>
+      <h3 class="table-label">
+        Mevcut Ürünler ({productsData.products && productsData.products.length}{' '}
+        adet)
+      </h3>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
@@ -41,13 +45,13 @@ const ProductsList = ({ productsData, deleteProduct, handleClickModal }) => {
                   <TableCell align="center">
                     <button
                       onClick={() => handleClickModal(item.productId)}
-                      className="button list"
+                      className="button button-list"
                     >
                       Düzenle
                     </button>
                     <button
                       onClick={() => deleteProduct(item.productId)}
-                      className="button list"
+                      className="button button-list"
                     >
                       Sil
                     </button>
@@ -57,11 +61,7 @@ const ProductsList = ({ productsData, deleteProduct, handleClickModal }) => {
           </TableBody>
         </Table>
       </TableContainer>
-      <h2>
-        Mevcut Ürünler (Toplam{' '}
-        {productsData.products && productsData.products.length} adet)
-      </h2>
-    </div>
+    </>
   );
 };
 

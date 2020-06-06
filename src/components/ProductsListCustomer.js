@@ -6,7 +6,6 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -19,11 +18,11 @@ const useStyles = makeStyles({
 const ProductsListCustomer = ({ productsData, handleRequestClick }) => {
   const classes = useStyles();
   return (
-    <div>
-      <h2>
-        Mevcut Ürünler (Toplam{' '}
-        {productsData.products && productsData.products.length} adet)
-      </h2>
+    <>
+      <h3 class="table-label">
+        Mevcut Ürünler ({productsData.products && productsData.products.length}{' '}
+        adet)
+      </h3>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
@@ -45,22 +44,16 @@ const ProductsListCustomer = ({ productsData, handleRequestClick }) => {
                   <TableCell align="right">{item.inventoryNumber}</TableCell>
                   <TableCell align="center">
                     {item.inventoryNumber === 0 ? (
-                      <Button
-                        disabled
-                        variant="contained"
-                        color="primary"
-                        onClick={() => handleRequestClick(item.productId)}
-                      >
+                      <button class="button button-list disabled" disabled>
                         Talep Et
-                      </Button>
+                      </button>
                     ) : (
-                      <Button
-                        variant="contained"
-                        color="primary"
+                      <button
+                        class="button button-list"
                         onClick={() => handleRequestClick(item.productId)}
                       >
                         Talep Et
-                      </Button>
+                      </button>
                     )}
                   </TableCell>
                 </TableRow>
@@ -68,7 +61,7 @@ const ProductsListCustomer = ({ productsData, handleRequestClick }) => {
           </TableBody>
         </Table>
       </TableContainer>
-    </div>
+    </>
   );
 };
 

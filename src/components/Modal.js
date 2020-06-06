@@ -9,17 +9,17 @@ const StyledModalContainer = styled.div`
   bottom: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
 `;
 
 const StyledFormContainer = styled.form`
   background-color: white;
-  height: 400px;
+  height: auto;
   width: 400px;
   margin: auto;
   text-align: center;
-  padding-top: 50px;
-  margin-top: 50px;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 5px;
 `;
 
 const Modal = ({ children }) => {

@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useLocation, useHistory, Link } from 'react-router-dom';
+import TextField from '@material-ui/core/TextField';
+
+import FormLayout from '../components/FormLayout';
 
 const RequestPage = () => {
   const location = useLocation();
@@ -31,31 +34,40 @@ const RequestPage = () => {
   };
 
   return (
-    <div>
-      <h1>Request Page</h1>
-      <label>Ürün İsmi</label>
-      <h3>{state.selectedData.productName}</h3>
-      <label>Ürün Kategorisi</label>
-      <h3>{state.selectedData.categoryName}</h3>
-      <label>Stok Sayısı</label>
-      <h3>{state.selectedData.inventoryNumber}</h3>
-      {showError && (
-        <h3 style={{ color: 'red' }}>Stokta yeterli ürün bulunmuyor.</h3>
-      )}
-      <label>
-        Talep Edilen Sayı
-        <input
-          type="number"
-          placeholder="Lütfen adet giriniz"
-          value={requestedNumber}
-          onChange={handleInputChange}
-        />
-      </label>
-      <button onClick={handleRequestClick}>Ekle</button>
+    <FormLayout>
+      <div class="request-form">
+        <label>Ürün İsmi</label>
+        <h4>{state.selectedData.productName}</h4>
+        <label>Ürün Kategorisi</label>
+        <h4>{state.selectedData.categoryName}</h4>
+        <label>Stok Sayısı</label>
+        <h4>{state.selectedData.inventoryNumber}</h4>
+
+        <label>
+          Talep Edilen Sayı
+          <div>
+            <TextField
+              style={{ margin: '20px 0' }}
+              id="standard-basic"
+              value={requestedNumber}
+              onChange={handleInputChange}
+              placeholder="Sayı giriniz"
+            />
+          </div>
+        </label>
+        {showError && (
+          <h4 style={{ color: 'red' }}>
+            Stokta yeterli ürün bulunmuyor. Lütfen tekrar giriniz
+          </h4>
+        )}
+      </div>
+      <button class="button stepper" onClick={handleRequestClick}>
+        Onayla
+      </button>
       <Link to="/customer">
-        <button>Vazgeç</button>
+        <button class="button stepper">Vazgeç</button>
       </Link>
-    </div>
+    </FormLayout>
   );
 };
 

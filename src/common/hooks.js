@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
+
 import '../App.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -41,7 +40,6 @@ const useForm = (labels, options, defaultStates) => {
             label="Kullanıcı Tipi"
             value={inputValues.dropdownInputValue}
             onChange={(e) => genericHandleChange('dropdownInputValue', e)}
-            variant="outlined"
             required
           >
             {options.map((option) => {
@@ -54,8 +52,7 @@ const useForm = (labels, options, defaultStates) => {
       {labels.firstInput && (
         <div>
           <TextField
-            id="outlined-basic"
-            variant="outlined"
+            id="standart-basic"
             label={labels.firstInput}
             value={inputValues.firstInputValue}
             onChange={(e) => genericHandleChange('firstInputValue', e)}
@@ -67,7 +64,6 @@ const useForm = (labels, options, defaultStates) => {
         <div>
           <TextField
             id="outlined-basic"
-            variant="outlined"
             label={labels.secondInput}
             value={inputValues.secondInputValue}
             onChange={(e) => genericHandleChange('secondInputValue', e)}
@@ -79,7 +75,6 @@ const useForm = (labels, options, defaultStates) => {
         <div>
           <TextField
             id="outlined-basic"
-            variant="outlined"
             label={labels.thirdInput}
             value={inputValues.thirdInputValue}
             onChange={(e) => genericHandleChange('thirdInputValue', e)}
@@ -91,7 +86,6 @@ const useForm = (labels, options, defaultStates) => {
         <div>
           <TextField
             id="outlined-basic"
-            variant="outlined"
             label={labels.fourthInput}
             value={inputValues.fourthInputValue}
             onChange={(e) => genericHandleChange('fourthInputValue', e)}
@@ -103,7 +97,6 @@ const useForm = (labels, options, defaultStates) => {
         <div>
           <TextField
             id="outlined-basic"
-            variant="outlined"
             label={labels.fifthInput}
             value={inputValues.fifthInputValue}
             onChange={(e) => genericHandleChange('fifthInputValue', e)}
@@ -115,7 +108,6 @@ const useForm = (labels, options, defaultStates) => {
         <div>
           <TextField
             id="outlined-basic"
-            variant="outlined"
             label={labels.sixthInput}
             value={inputValues.sixthInputValue}
             onChange={(e) => genericHandleChange('sixthInputValue', e)}

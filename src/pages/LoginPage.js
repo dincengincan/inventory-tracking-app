@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import Button from '@material-ui/core/Button';
+
+import FormLayout from '../components/FormLayout';
 
 import '../App.css';
 
@@ -83,16 +82,12 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="App">
-      <h2>Login</h2>
-      <form
-        onSubmit={handleSubmit}
-        className={classes.root}
-        noValidate
-        autoComplete="off"
-      >
+    <FormLayout width={300}>
+      <h2>LOGIN</h2>
+      <form className={classes.root} noValidate autoComplete="off">
         <div>
           <TextField
+            style={{ margin: '20px 0' }}
             id="standard-select-usertype"
             select
             label="Kullanıcı Tipi"
@@ -105,6 +100,7 @@ const LoginPage = () => {
         </div>
         <div>
           <TextField
+            style={{ margin: '20px 0' }}
             id="standard-basic"
             label="Kullanıcı Adı"
             value={username}
@@ -113,28 +109,29 @@ const LoginPage = () => {
         </div>
         <div>
           <TextField
+            style={{ margin: '20px 0' }}
             id="standard-basic"
             label="Şifre"
             value={password}
             onChange={handlePasswordChange}
           />
         </div>
-        <Button variant="contained" color="primary" onClick={handleSubmit}>
-          Giriş Yap
-        </Button>
-
-        {result === 'success' && (
-          <div>
-            <h2>Giriş Başarılı! Yönlendiriliyorsunuz...</h2>
-          </div>
-        )}
-        {result === 'failure' && (
-          <div>
-            <h2>Hatalı Kullanıcı Adı veya Şifre!</h2>
-          </div>
-        )}
       </form>
-    </div>
+      <button onClick={handleSubmit} class="button button-login">
+        Giriş Yap
+      </button>
+
+      {result === 'success' && (
+        <div>
+          <h3>Giriş Başarılı! Yönlendiriliyorsunuz...</h3>
+        </div>
+      )}
+      {result === 'failure' && (
+        <div>
+          <h3>Hatalı Kullanıcı Adı veya Şifre!</h3>
+        </div>
+      )}
+    </FormLayout>
   );
 };
 
