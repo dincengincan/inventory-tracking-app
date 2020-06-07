@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/inventory-tracking-app/static/css/main.e40eb285.chunk.css",
-    "main.js": "/inventory-tracking-app/static/js/main.683d5bb5.chunk.js",
-    "main.js.map": "/inventory-tracking-app/static/js/main.683d5bb5.chunk.js.map",
+    "main.js": "/inventory-tracking-app/static/js/main.8426f103.chunk.js",
+    "main.js.map": "/inventory-tracking-app/static/js/main.8426f103.chunk.js.map",
     "runtime-main.js": "/inventory-tracking-app/static/js/runtime-main.ccdaaa9a.js",
     "runtime-main.js.map": "/inventory-tracking-app/static/js/runtime-main.ccdaaa9a.js.map",
     "static/js/2.6773b063.chunk.js": "/inventory-tracking-app/static/js/2.6773b063.chunk.js",
     "static/js/2.6773b063.chunk.js.map": "/inventory-tracking-app/static/js/2.6773b063.chunk.js.map",
     "index.html": "/inventory-tracking-app/index.html",
-    "precache-manifest.fbe562433b06a9ea64fba306c0f347c8.js": "/inventory-tracking-app/precache-manifest.fbe562433b06a9ea64fba306c0f347c8.js",
+    "precache-manifest.26fb601956911412bfd8b57d70a102f0.js": "/inventory-tracking-app/precache-manifest.26fb601956911412bfd8b57d70a102f0.js",
     "service-worker.js": "/inventory-tracking-app/service-worker.js",
     "static/css/main.e40eb285.chunk.css.map": "/inventory-tracking-app/static/css/main.e40eb285.chunk.css.map",
     "static/js/2.6773b063.chunk.js.LICENSE.txt": "/inventory-tracking-app/static/js/2.6773b063.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.ccdaaa9a.js",
     "static/js/2.6773b063.chunk.js",
     "static/css/main.e40eb285.chunk.css",
-    "static/js/main.683d5bb5.chunk.js"
+    "static/js/main.8426f103.chunk.js"
   ]
 }
