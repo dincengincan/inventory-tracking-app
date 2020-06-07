@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const LoginPage = () => {
-  const [username, setUsername] = useState('ecdinc');
+  const [username, setUsername] = useState('sezgin');
   const [password, setPassword] = useState('12345');
   const [dropdownValue, setDropdownValue] = useState('Yönetici');
   const [loginData, setLoginData] = useState({});
