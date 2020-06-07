@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 const LoginPage = () => {
   const [username, setUsername] = useState('ecdinc');
   const [password, setPassword] = useState('12345');
-  const [dropdownValue, setDropdownValue] = useState('admin');
+  const [dropdownValue, setDropdownValue] = useState('Yönetici');
   const [loginData, setLoginData] = useState({});
   const [result, setResult] = useState('');
 
@@ -53,7 +53,7 @@ const LoginPage = () => {
     getData();
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
 
     const selectedUserObject = loginData.users.find((item) => {
@@ -64,12 +64,12 @@ const LoginPage = () => {
       const isUserCorrect =
         selectedUserObject.password === password &&
         selectedUserObject.userType === dropdownValue;
-      if (dropdownValue === 'admin' && isUserCorrect) {
+      if (dropdownValue === 'Yönetici' && isUserCorrect) {
         setResult('success');
         history.push('/admin');
         return;
       }
-      if (dropdownValue === 'customer' && isUserCorrect) {
+      if (dropdownValue === 'Müşteri' && isUserCorrect) {
         setResult('success');
         history.push({
           pathname: '/customer',
@@ -94,8 +94,8 @@ const LoginPage = () => {
             value={dropdownValue}
             onChange={handleDropdownChange}
           >
-            <MenuItem value="customer">Müşteri</MenuItem>
-            <MenuItem value="admin">Yönetici</MenuItem>
+            <MenuItem value="Müşteri">Müşteri</MenuItem>
+            <MenuItem value="Yönetici">Yönetici</MenuItem>
           </TextField>
         </div>
         <div>
@@ -117,7 +117,7 @@ const LoginPage = () => {
           />
         </div>
       </form>
-      <button onClick={handleSubmit} class="button button-login">
+      <button onClick={handleLogin} class="button button-login">
         Giriş Yap
       </button>
 

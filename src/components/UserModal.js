@@ -30,7 +30,7 @@ const UserModal = ({ closeModal, customerId, formData, getUsersData }) => {
     fifthInput: selectedData.email,
   };
 
-  const options = ['admin', 'user'];
+  const options = ['Yönetici', 'Müşteri'];
 
   const [userForm, inputStates] = useForm(labels, options, defaultStates);
   const [

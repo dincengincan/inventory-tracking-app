@@ -17,10 +17,10 @@ const AddUser = ({ addNewUser, newUserResult, closeNotification }) => {
   };
 
   const defaultStates = {
-    dropdown: 'customer',
+    dropdown: 'Müşteri',
   };
 
-  const options = ['admin', 'customer'];
+  const options = ['Yönetici', 'Müşteri'];
 
   const [userForm, inputStates] = useForm(labels, options, defaultStates);
 
