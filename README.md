@@ -1,5 +1,5 @@
 # Inventory Tracking Application
-An app built using with React, Material UI and Mock Api.
+An app built using with React, Material UI and Mock API.
 
 
 Application can be used by two types of user: Admin and Customer. Admin is able to add new users(customer) and products into the application while client can check the inventory for the various available products. Also, there is a notification system added in the application for Admin to see different kind of transactions in the app.  
