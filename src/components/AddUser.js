@@ -8,19 +8,19 @@ const AddUser = ({ addNewUser, newUserResult, closeNotification }) => {
   const [showError, setShowError] = useState(false);
 
   const labels = {
-    dropdown: 'Kullanıcı Tipi',
-    firstInput: 'Kullanıcı Adı',
-    secondInput: 'Şifre',
-    thirdInput: 'Ad',
-    fourthInput: 'Soyad',
+    dropdown: 'User Type',
+    firstInput: 'User Name',
+    secondInput: 'Password',
+    thirdInput: 'Name',
+    fourthInput: 'Surname',
     fifthInput: 'Email',
   };
 
   const defaultStates = {
-    dropdown: 'Müşteri',
+    dropdown: 'Customer',
   };
 
-  const options = ['Yönetici', 'Müşteri'];
+  const options = ['Admin', 'Customer'];
 
   const [userForm, inputStates] = useForm(labels, options, defaultStates);
 
@@ -60,9 +60,7 @@ const AddUser = ({ addNewUser, newUserResult, closeNotification }) => {
       <div class="form">
         {userForm()}
         {/*can not use as < UserForm /> due to problem of re-rendering */}
-        {showError && (
-          <Notification notificationText="* işaretli alanlar gereklidir" />
-        )}
+        {showError && <Notification notificationText="* required fields" />}
         <button className="button" onClick={handleClick}>
           Add
         </button>
@@ -71,7 +69,7 @@ const AddUser = ({ addNewUser, newUserResult, closeNotification }) => {
         open={newUserResult === 'success'}
         autoHideDuration={5000}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-        message="Yeni kullanıcı başarıyla eklendi"
+        message="New User Succesfully Added"
         key={('top', 'center')}
         onClose={closeNotification}
       />

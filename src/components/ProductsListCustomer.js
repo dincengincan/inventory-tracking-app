@@ -20,17 +20,17 @@ const ProductsListCustomer = ({ productsData, handleRequestClick }) => {
   return (
     <>
       <h3 class="table-label">
-        Mevcut Ürünler ({productsData.products && productsData.products.length}{' '}
-        adet)
+        Available Products (
+        {productsData.products && productsData.products.length} Items)
       </h3>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Ürün İsmi</TableCell>
-              <TableCell align="right">Kategori</TableCell>
+              <TableCell>Product Name</TableCell>
+              <TableCell align="right">Category</TableCell>
               <TableCell align="right">Stok</TableCell>
-              <TableCell align="center">İşlem</TableCell>
+              <TableCell align="center">Transaction</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -45,14 +45,14 @@ const ProductsListCustomer = ({ productsData, handleRequestClick }) => {
                   <TableCell align="center">
                     {item.inventoryNumber === 0 ? (
                       <button class="button button-list disabled" disabled>
-                        Talep Et
+                        Request
                       </button>
                     ) : (
                       <button
                         class="button button-list"
                         onClick={() => handleRequestClick(item.productId)}
                       >
-                        Talep Et
+                        Request
                       </button>
                     )}
                   </TableCell>

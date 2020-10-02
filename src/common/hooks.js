@@ -37,7 +37,7 @@ const useForm = (labels, options, defaultStates) => {
           <TextField
             id="standard-select-usertype"
             select
-            label="Kullanıcı Tipi"
+            label="User Type"
             value={inputValues.dropdownInputValue}
             onChange={(e) => genericHandleChange('dropdownInputValue', e)}
             required

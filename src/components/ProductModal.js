@@ -13,9 +13,9 @@ const ProductModal = ({ closeModal, productId, formData, getProductsData }) => {
   });
 
   const labels = {
-    dropdown: 'Kategori Adı',
-    firstInput: 'Ürün İsmi',
-    secondInput: 'Eklenecek Stok Sayısı',
+    dropdown: 'Category Name',
+    firstInput: 'Product Name',
+    secondInput: 'Amount to be Added',
   };
 
   const defaultStates = {
@@ -24,7 +24,7 @@ const ProductModal = ({ closeModal, productId, formData, getProductsData }) => {
     secondInput: selectedData.inventoryNumber,
   };
 
-  const options = ['Kırtasiye', 'Teknik', 'Diğer'];
+  const options = ['Stationery', 'Technical', 'Other'];
 
   const [productForm, inputStates] = useForm(labels, options, defaultStates);
   const [comboboxValue, productNameValue, inventoryNumberValue] = inputStates;
@@ -63,9 +63,7 @@ const ProductModal = ({ closeModal, productId, formData, getProductsData }) => {
   return (
     <ModalMui>
       {productForm()}
-      {showError && (
-        <Notification notificationText="* işaretli alanlar gereklidir" />
-      )}
+      {showError && <Notification notificationText="* required fields" />}
       <button className="button modal" onClick={updateProduct}>
         Kaydet
       </button>

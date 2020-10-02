@@ -25,7 +25,11 @@ const SimpleStepper = () => {
   const location = useLocation();
   const classes = useStyles();
 
-  const steps = ['Talep Oluştur', 'Talebi Onayla', 'Talebiniz Alınmıştır!'];
+  const steps = [
+    'Make a Request',
+    'Submit a Request',
+    'Your Request Has Been Submitted!',
+  ];
 
   const getActiveStep = () => {
     if (location.pathname === '/request') return 0;

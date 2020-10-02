@@ -19,20 +19,19 @@ const UsersList = ({ loginUserData, deleteUser, handleClickModal }) => {
   return (
     <>
       <h3 class="table-label">
-        Mevcut Kullanıcılar ({loginUserData.users && loginUserData.users.length}{' '}
-        adet)
+        Available Users ({loginUserData.users && loginUserData.users.length})
       </h3>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Kullanıcı Adı</TableCell>
-              <TableCell align="right">Ad</TableCell>
-              <TableCell align="right">Soyad</TableCell>
-              <TableCell align="right">Kullanıcı Tipi</TableCell>
+              <TableCell>User Name</TableCell>
+              <TableCell align="right">Name</TableCell>
+              <TableCell align="right">Surname</TableCell>
+              <TableCell align="right">User Type</TableCell>
               <TableCell align="right">Parola</TableCell>
               <TableCell align="right">E-mail</TableCell>
-              <TableCell align="center">İşlem</TableCell>
+              <TableCell align="center">Transaction</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

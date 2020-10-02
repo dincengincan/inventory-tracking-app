@@ -13,11 +13,11 @@ const UserModal = ({ closeModal, customerId, formData, getUsersData }) => {
   });
 
   const labels = {
-    dropdown: 'Kullanıcı Tipi',
-    firstInput: 'Kullanıcı Adı',
-    secondInput: 'Şifre',
-    thirdInput: 'Ad',
-    fourthInput: 'Soyad',
+    dropdown: 'User Type',
+    firstInput: 'User Name',
+    secondInput: 'Password',
+    thirdInput: 'Name',
+    fourthInput: 'Surname',
     fifthInput: 'Email',
   };
 
@@ -30,7 +30,7 @@ const UserModal = ({ closeModal, customerId, formData, getUsersData }) => {
     fifthInput: selectedData.email,
   };
 
-  const options = ['Yönetici', 'Müşteri'];
+  const options = ['Admin', 'Customer'];
 
   const [userForm, inputStates] = useForm(labels, options, defaultStates);
   const [
@@ -86,9 +86,7 @@ const UserModal = ({ closeModal, customerId, formData, getUsersData }) => {
   return (
     <ModalMui>
       {userForm()}
-      {showError && (
-        <Notification notificationText="* işaretli alanlar gereklidir" />
-      )}
+      {showError && <Notification notificationText="* required fields" />}
       <button className="button modal" onClick={updateUser}>
         Kaydet
       </button>

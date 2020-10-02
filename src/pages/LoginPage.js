@@ -18,9 +18,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const LoginPage = () => {
-  const [username, setUsername] = useState('sezgin');
+  const [username, setUsername] = useState('johndoe');
   const [password, setPassword] = useState('12345');
-  const [dropdownValue, setDropdownValue] = useState('Yönetici');
+  const [dropdownValue, setDropdownValue] = useState('Admin');
   const [loginData, setLoginData] = useState({});
   const [result, setResult] = useState('');
 
@@ -38,6 +38,11 @@ const LoginPage = () => {
 
   const handleDropdownChange = (e) => {
     setDropdownValue(e.target.value);
+    if (e.target.value === 'Customer') {
+      setUsername('janetdoe');
+    } else if (e.target.value === 'Admin') {
+      setUsername('johndoe');
+    }
   };
   useEffect(() => {
     const getData = async () => {
@@ -64,12 +69,12 @@ const LoginPage = () => {
       const isUserCorrect =
         selectedUserObject.password === password &&
         selectedUserObject.userType === dropdownValue;
-      if (dropdownValue === 'Yönetici' && isUserCorrect) {
+      if (dropdownValue === 'Admin' && isUserCorrect) {
         setResult('success');
         history.push('/admin');
         return;
       }
-      if (dropdownValue === 'Müşteri' && isUserCorrect) {
+      if (dropdownValue === 'Customer' && isUserCorrect) {
         setResult('success');
         history.push({
           pathname: '/customer',
@@ -90,19 +95,19 @@ const LoginPage = () => {
             style={{ margin: '20px 0' }}
             id="standard-select-usertype"
             select
-            label="Kullanıcı Tipi"
+            label="User Type"
             value={dropdownValue}
             onChange={handleDropdownChange}
           >
-            <MenuItem value="Müşteri">Müşteri</MenuItem>
-            <MenuItem value="Yönetici">Yönetici</MenuItem>
+            <MenuItem value="Customer">Customer</MenuItem>
+            <MenuItem value="Admin">Admin</MenuItem>
           </TextField>
         </div>
         <div>
           <TextField
             style={{ margin: '20px 0' }}
             id="standard-basic"
-            label="Kullanıcı Adı"
+            label="User Name"
             value={username}
             onChange={handleUsernameChange}
           />
@@ -111,24 +116,24 @@ const LoginPage = () => {
           <TextField
             style={{ margin: '20px 0' }}
             id="standard-basic"
-            label="Şifre"
+            label="Password"
             value={password}
             onChange={handlePasswordChange}
           />
         </div>
       </form>
       <button onClick={handleLogin} class="button button-login">
-        Giriş Yap
+        Log in
       </button>
 
       {result === 'success' && (
         <div>
-          <h3>Giriş Başarılı! Yönlendiriliyorsunuz...</h3>
+          <h3 class="login-message">Succesfully logged in! Redirecting...</h3>
         </div>
       )}
       {result === 'failure' && (
         <div>
-          <h3>Hatalı Kullanıcı Adı veya Şifre!</h3>
+          <h3 class="login-message">Invalid username or password! Try again</h3>
         </div>
       )}
     </FormLayout>

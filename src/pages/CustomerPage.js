@@ -34,7 +34,7 @@ const CustomerPage = () => {
 
   return (
     <FormLayout>
-      <h2>Müşteri Paneli</h2>
+      <h2>Customer Paneli</h2>
       <ProductsListCustomer
         handleRequestClick={handleRequestClick}
         productsData={productsData}

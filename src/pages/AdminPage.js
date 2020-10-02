@@ -270,8 +270,8 @@ const AdminPage = () => {
   );
 
   const closeNotification = () => {
-    setNewProductResult("");
-    setNewUserResult("")
+    setNewProductResult('');
+    setNewUserResult('');
   };
 
   return (
@@ -310,15 +310,15 @@ const AdminPage = () => {
           getUsersData={getUsersData}
         />
       )}
-      <h3 class="notification-label">Kullanıcı Bildirimleri</h3>
+      <h3 class="notification-label">User Notifications</h3>
       <ul>
         {notifications.map((notification) => {
           return (
             <li>
-              <b>{`${notification.orderOwner.user.name} ${notification.orderOwner.user.surname} 
-                ${notification.createdAt}`}</b>{' '}
-              tarihinde <b>{`${notification.orderNumber}`}</b> adet{' '}
-              <b>{`${notification.orderName}`}</b> talep etti.
+              <b>{`${notification.orderOwner.user.name} ${notification.orderOwner.user.surname}`}</b>{' '}
+              has requested <b>{`${notification.orderNumber}`}</b>{' '}
+              <b>{`${notification.orderName}`}</b> at{' '}
+              <b>{notification.createdAt}</b>.
             </li>
           );
         })}

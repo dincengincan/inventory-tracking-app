@@ -36,36 +36,36 @@ const RequestPage = () => {
   return (
     <FormLayout>
       <div class="request-form">
-        <label>Ürün İsmi</label>
+        <label>Product Name</label>
         <h4>{state.selectedData.productName}</h4>
-        <label>Ürün Kategorisi</label>
+        <label>Product Category</label>
         <h4>{state.selectedData.categoryName}</h4>
-        <label>Stok Sayısı</label>
+        <label>Amount Of Stock</label>
         <h4>{state.selectedData.inventoryNumber}</h4>
 
         <label>
-          Talep Edilen Sayı
+          Requested Amount
           <div>
             <TextField
               style={{ margin: '20px 0' }}
               id="standard-basic"
               value={requestedNumber}
               onChange={handleInputChange}
-              placeholder="Sayı giriniz"
+              placeholder="Type a Number"
             />
           </div>
         </label>
         {showError && (
           <h4 style={{ color: 'red' }}>
-            Stokta yeterli ürün bulunmuyor. Lütfen tekrar giriniz
+            There isn't enough of this item! Please type again
           </h4>
         )}
       </div>
       <button class="button stepper" onClick={handleRequestClick}>
-        Onayla
+        Submit
       </button>
       <Link to="/customer">
-        <button class="button stepper">Vazgeç</button>
+        <button class="button stepper">Cancel</button>
       </Link>
     </FormLayout>
   );

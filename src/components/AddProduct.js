@@ -8,16 +8,16 @@ const AddProduct = ({ newProductResult, addNewProduct, closeNotification }) => {
   const [showError, setShowError] = useState(false);
 
   const labels = {
-    dropdown: 'Kategori Adı',
-    firstInput: 'Ürün İsmi',
-    secondInput: 'Eklenecek Stok Sayısı',
+    dropdown: 'Category Name',
+    firstInput: 'Product Name',
+    secondInput: 'Amount to be Added',
   };
 
   const defaultStates = {
-    dropdown: 'Teknik',
+    dropdown: 'Technical',
   };
 
-  const options = ['Kırtasiye', 'Teknik', 'Diğer'];
+  const options = ['Stationery', 'Technical', 'Other'];
 
   const [productForm, inputStates] = useForm(labels, options, defaultStates);
   const [comboboxValue, productName, inventoryNumber] = inputStates;
@@ -36,9 +36,7 @@ const AddProduct = ({ newProductResult, addNewProduct, closeNotification }) => {
       <div class="form">
         {productForm()}
         {/*can not use as < ProductFrom /> due to problem of re-rendering */}
-        {showError && (
-          <Notification notificationText="* işaretli alanlar gereklidir" />
-        )}
+        {showError && <Notification notificationText="* required fields" />}
         <button className="button" onClick={handleClick}>
           Add
         </button>
@@ -47,7 +45,7 @@ const AddProduct = ({ newProductResult, addNewProduct, closeNotification }) => {
         open={newProductResult === 'success'}
         autoHideDuration={5000}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-        message="Yeni ürün başarıyla eklendi"
+        message="New Product Added!"
         key={('top', 'center')}
         onClose={closeNotification}
       />

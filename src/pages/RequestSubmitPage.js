@@ -80,13 +80,13 @@ const RequestSubmitPage = () => {
   return (
     <FormLayout>
       <div class="request-form">
-        <label>Ürün İsmi</label>
+        <label>Product Name</label>
         <h4>{state.selectedData.productName}</h4>
-        <label>Ürün Kategorisi</label>
+        <label>Product Category</label>
         <h4>{state.selectedData.categoryName}</h4>
-        <label>Stok Sayısı</label>
+        <label>Amount Of Stock</label>
         <h4>{state.selectedData.inventoryNumber}</h4>
-        <label>Talep Edilen Sayı</label>
+        <label>Requested Amount</label>
         <h4>{state.requestedNumber}</h4>
       </div>
       <Link
@@ -95,13 +95,13 @@ const RequestSubmitPage = () => {
           state: state,
         }}
       >
-        <button class="button stepper">Düzelt</button>
+        <button class="button stepper">Edit</button>
       </Link>
       <Link to="/customer">
-        <button class="button stepper">Geri Dön</button>
+        <button class="button stepper">Previous Step</button>
       </Link>
       <button class="button stepper" onClick={handleClick}>
-        Onayla
+        Submit
       </button>
     </FormLayout>
   );

@@ -5,9 +5,9 @@ import '../App.css';
 
 const Header = () => (
   <div className="header">
-    <h3>Stok Takip App</h3>
+    <h3>Inventory Tracking App</h3>
     <Link style={{ color: 'white', paddingRight: '20px' }} to="/">
-      Login Sayfası
+      Login Page
     </Link>
   </div>
 );
